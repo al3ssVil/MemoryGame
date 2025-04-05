@@ -7,6 +7,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using static System.Net.Mime.MediaTypeNames;
+using MemoryGame.Models;
+using Application = System.Windows.Application;
 
 namespace MemoryGame.ViewModels
 {
@@ -110,7 +113,6 @@ namespace MemoryGame.ViewModels
                 }
             }
         }
-
         public GameViewModel()
         {
             Categories = new ObservableCollection<string> { "Animals", "Nature", "Flowers" };
@@ -174,7 +176,7 @@ namespace MemoryGame.ViewModels
         private void Exit(object obj)
         {
             MessageBox.Show("Exiting the game...");
-            Application.Current.Shutdown(); 
+            Application.Current.MainWindow.Close();
         }
 
         private void SetStandardBoardSize(object obj)
@@ -203,10 +205,13 @@ namespace MemoryGame.ViewModels
             if (SelectedColumns > 0 && SelectedRows > 0)
             {
                 GameCards = new ObservableCollection<Button>();
-           
-                ButtonWidth = (800 - 10 * (SelectedColumns)) / SelectedColumns-30;
-                ButtonHeight = (800 - 10 * (SelectedRows)) / SelectedRows-30;
-                //MessageBox.Show($"{ButtonWidth}, {ButtonHeight}");
+
+                double windowWidth = Application.Current.MainWindow.ActualWidth ;
+                double windowHeight = Application.Current.MainWindow.ActualHeight;
+                MessageBox.Show($"{windowWidth}, {windowHeight}");
+                ButtonWidth = windowWidth / SelectedColumns-100;
+                ButtonHeight = windowHeight / SelectedRows-20;
+                //MessageBox.Show($"{ButtonWidth}, {ButtonHeight}");S
 
                 List<string> imagePaths = new List<string>();
 

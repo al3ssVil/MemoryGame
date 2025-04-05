@@ -19,7 +19,10 @@ namespace MemoryGame.Views
     /// </summary>
     public partial class GameWindow : Window
     {
-        public GameWindow() => InitializeComponent();
+        public GameWindow()
+        {
+            InitializeComponent(); 
+        }
 
     }
 }

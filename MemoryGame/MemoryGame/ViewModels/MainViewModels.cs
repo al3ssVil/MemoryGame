@@ -147,6 +147,7 @@ namespace MemoryGame.ViewModels
         {
             GameWindow gameWindow = new GameWindow();
             gameWindow.Show();
+            Application.Current.MainWindow.Close();
         }
 
         private void NextImage()
