@@ -55,6 +55,11 @@ namespace MemoryGame.ViewModels
         List<string> imageNature = new List<string> { };
         List<string> imageFlowers = new List<string> { };
 
+        public ObservableCollection<Button> GameCards { get; set; }
+
+        private Button? firstCard = null;
+        private Button? secondCard = null;
+        private bool isChecking = false;
         public ObservableCollection<int> RowOptions { get; set; }
         public ObservableCollection<int> ColumnOptions { get; set; }
 
@@ -97,8 +102,6 @@ namespace MemoryGame.ViewModels
         public double ButtonWidth { get; set; }
         public double ButtonHeight { get; set; }
 
-        public ObservableCollection<Button> GameCards { get; set; }
-
         private bool _welcomeTextVisibility = true; 
 
         public bool WelcomeTextVisibility
@@ -113,6 +116,7 @@ namespace MemoryGame.ViewModels
                 }
             }
         }
+
         public GameViewModel()
         {
             Categories = new ObservableCollection<string> { "Animals", "Nature", "Flowers" };
@@ -211,7 +215,7 @@ namespace MemoryGame.ViewModels
                 MessageBox.Show($"{windowWidth}, {windowHeight}");
                 ButtonWidth = windowWidth / SelectedColumns-100;
                 ButtonHeight = windowHeight / SelectedRows-20;
-                //MessageBox.Show($"{ButtonWidth}, {ButtonHeight}");S
+                //MessageBox.Show($"{ButtonWidth}, {ButtonHeight}");
 
                 List<string> imagePaths = new List<string>();
 
@@ -285,25 +289,65 @@ namespace MemoryGame.ViewModels
 
         private void CardClicked(object obj)
         {
-            MessageBox.Show("Card clicked. Image shown behind the button.");
+            if (isChecking) return; 
+
             if (obj is Button clickedButton)
             {
                 string? imagePath = clickedButton.Tag as string;
 
-                double buttonWidth = clickedButton.ActualWidth;
-                double buttonHeight = clickedButton.ActualHeight;
-
-                var imageBrush = new ImageBrush
+                if (clickedButton.IsEnabled)
                 {
-                    ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative)),
-                    Stretch = Stretch.Uniform,  
-                    AlignmentX = AlignmentX.Center,
-                    AlignmentY = AlignmentY.Center
-                };
+                    double buttonWidth = clickedButton.ActualWidth;
+                    double buttonHeight = clickedButton.ActualHeight;
 
-                clickedButton.Background = imageBrush;
-                clickedButton.Content = null; 
-                clickedButton.IsEnabled = false;
+                    var imageBrush = new ImageBrush
+                    {
+                        ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative)),
+                        Stretch = Stretch.Uniform,
+                        AlignmentX = AlignmentX.Center,
+                        AlignmentY = AlignmentY.Center
+                    };
+
+                    clickedButton.Background = imageBrush;
+                    clickedButton.Content = null; 
+                    clickedButton.IsEnabled = false; 
+
+                    if (firstCard == null)
+                    {
+                        firstCard = clickedButton;
+                    }
+                    else if (secondCard == null)
+                    {
+                        secondCard = clickedButton;
+                        isChecking = true;
+
+                        Task.Delay(1000).ContinueWith(_ =>
+                        {
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                if (firstCard.Tag.ToString() == secondCard.Tag.ToString())
+                                {
+                                    firstCard = null;
+                                    secondCard = null;
+                                }
+                                else
+                                {
+                                    firstCard.Background = Brushes.Gray;
+                                    firstCard.Content = "?";
+                                    firstCard.IsEnabled = true;
+
+                                    secondCard.Background = Brushes.Gray;
+                                    secondCard.Content = "?";
+                                    secondCard.IsEnabled = true;
+
+                                    firstCard = null;
+                                    secondCard = null;
+                                }
+                                isChecking = false;
+                            });
+                        });
+                    }
+                }
             }
         }
     }
