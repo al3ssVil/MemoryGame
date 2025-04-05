@@ -1,0 +1,137 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|c:\\users\\vilcu\\desktop\\projects\\memorygame\\memorygame\\memorygame\\viewmodels\\mainviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|solutionrelative:memorygame\\viewmodels\\mainviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|c:\\users\\vilcu\\desktop\\projects\\memorygame\\memorygame\\memorygame\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|solutionrelative:memorygame\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|c:\\users\\vilcu\\desktop\\projects\\memorygame\\memorygame\\memorygame\\data\\users.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|solutionrelative:memorygame\\data\\users.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|c:\\users\\vilcu\\desktop\\projects\\memorygame\\memorygame\\memorygame\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|solutionrelative:memorygame\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|c:\\users\\vilcu\\desktop\\projects\\memorygame\\memorygame\\memorygame\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|solutionrelative:memorygame\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|c:\\users\\vilcu\\desktop\\projects\\memorygame\\memorygame\\memorygame\\helpers\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|solutionrelative:memorygame\\helpers\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|c:\\users\\vilcu\\desktop\\projects\\memorygame\\memorygame\\memorygame\\memorygame.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|solutionrelative:memorygame\\memorygame.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "App.xaml",
+              "DocumentMoniker": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\App.xaml",
+              "RelativeDocumentMoniker": "MemoryGame\\App.xaml",
+              "ToolTip": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\App.xaml",
+              "RelativeToolTip": "MemoryGame\\App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-05T12:04:17.938Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\Views\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MemoryGame\\Views\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\Views\\MainWindow.xaml",
+              "RelativeToolTip": "MemoryGame\\Views\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-05T09:51:25.802Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "users.json",
+              "DocumentMoniker": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\Data\\users.json",
+              "RelativeDocumentMoniker": "MemoryGame\\Data\\users.json",
+              "ToolTip": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\Data\\users.json",
+              "RelativeToolTip": "MemoryGame\\Data\\users.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-05T10:37:02.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainViewModels.cs",
+              "DocumentMoniker": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\ViewModels\\MainViewModels.cs",
+              "RelativeDocumentMoniker": "MemoryGame\\ViewModels\\MainViewModels.cs",
+              "ToolTip": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\ViewModels\\MainViewModels.cs",
+              "RelativeToolTip": "MemoryGame\\ViewModels\\MainViewModels.cs",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAkwLoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T09:56:19.344Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\Models\\User.cs",
+              "RelativeDocumentMoniker": "MemoryGame\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\Models\\User.cs",
+              "RelativeToolTip": "MemoryGame\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T09:55:32.924Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RelayCommand.cs",
+              "DocumentMoniker": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\Helpers\\RelayCommand.cs",
+              "RelativeDocumentMoniker": "MemoryGame\\Helpers\\RelayCommand.cs",
+              "ToolTip": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\Helpers\\RelayCommand.cs",
+              "RelativeToolTip": "MemoryGame\\Helpers\\RelayCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-05T09:56:50.738Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MemoryGame",
+              "DocumentMoniker": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\MemoryGame.csproj",
+              "RelativeDocumentMoniker": "MemoryGame\\MemoryGame.csproj",
+              "ToolTip": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\MemoryGame.csproj",
+              "RelativeToolTip": "MemoryGame\\MemoryGame.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-05T09:53:56.383Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

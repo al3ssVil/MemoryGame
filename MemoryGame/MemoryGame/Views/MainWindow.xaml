@@ -1,0 +1,106 @@
+﻿<Window x:Class="MemoryGame.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:MemoryGame.ViewModels"
+        Title="Sign In" Height="400" Width="500"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" >
+
+    <Window.Background>
+        <!-- Folosim un ImageBrush pentru a pune imaginea de fundal -->
+        <ImageBrush ImageSource="../../../Images/background.jpg" Stretch="Fill"/>
+    </Window.Background>
+
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <!-- Conținut -->
+            <RowDefinition Height="Auto" />
+            <!-- Butoane jos -->
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Lista utilizatorilor -->
+        <ListBox ItemsSource="{Binding Users}"
+         SelectedItem="{Binding SelectedUser}"
+         DisplayMemberPath="Name"
+         Grid.Row="0" Grid.Column="0"
+         Margin="5">
+            <ListBox.Background>
+                <SolidColorBrush Color="Gray" Opacity="0.6"/>
+            </ListBox.Background>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="FontFamily" Value="Segoe Script"/>
+                    <Setter Property="FontSize" Value="13"/>
+                    <Setter Property="FontStyle" Value="Italic"/>
+                    <Setter Property="FontWeight" Value="Light"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+
+        <!-- Preview imagine + butoane stânga/dreapta -->
+        <Grid Grid.Row="0" Grid.Column="1" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Imagine -->
+            <Image Source="{Binding SelectedImage}"
+                   Stretch="Uniform"
+                   Height="200"
+                   Width="200"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+
+            <!-- Butoane stânga/dreapta -->
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                <Button Content="←" Width="40" Command="{Binding PreviousImageCommand}" />
+                <Button Content="→" Width="40" Command="{Binding NextImageCommand}" Margin="10,0,0,0" />
+            </StackPanel>
+
+            <!-- TextBox pentru numele utilizatorului -->
+            <StackPanel Grid.Row="2" HorizontalAlignment="Center" Margin="10">
+                <!-- TextBlock cu fontul Segoe Script -->
+                <TextBlock Text="Introduceți numele utilizatorului:" 
+                           VerticalAlignment="Center" 
+                           FontFamily="Segoe Script" 
+                           FontSize="13" 
+                           FontStyle="Italic" 
+                           FontWeight="DemiBold"
+                           Foreground="Black" />
+
+                <!-- TextBox cu fontul Segoe Script -->
+                <TextBox Text="{Binding NewUserName}" 
+                         Width="200" 
+                         Margin="0,0,0,10"
+                         FontFamily="Segoe Script" 
+                         FontSize="14" 
+                         FontStyle="Italic" 
+                         FontWeight="Light" 
+                         Opacity="0.8"
+                         BorderBrush="Gray"
+                         Background="Gray"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Butoane jos -->
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,0">
+            <Button Content="New User" Command="{Binding NewUserCommand}" Height="20" Width="80" Margin="0,0,30,0"/>
+            <Button Content="Delete User" Command="{Binding DeleteUserCommand}" Height="20" Width="80" IsEnabled="{Binding CanPlayOrDelete}" Margin="0,0,30,0"/>
+            <Button Content="Play" Command="{Binding PlayCommand}" Height="20" Width="80" IsEnabled="{Binding CanPlayOrDelete}" Margin="0,0,30,0"/>
+            <Button Content="Cancel" Command="{Binding CancelCommand}" Height="20" Width="80"  Margin="0,0,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
