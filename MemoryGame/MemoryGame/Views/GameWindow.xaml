@@ -121,15 +121,10 @@
                         <DataTemplate>
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <!-- Butonul cu semnul de întrebare -->
-                                <Button BorderBrush="Black" BorderThickness="2"
-                                        Width="{Binding DataContext.ButtonWidth, RelativeSource={RelativeSource AncestorType=Window}}"
-                                        Height="{Binding DataContext.ButtonHeight, RelativeSource={RelativeSource AncestorType=Window}}"
+                                <Button BorderBrush="Black" Width="200" Height="200"
                                         Command="{Binding DataContext.CardClicked, RelativeSource={RelativeSource AncestorType=Window}}">
                                     <TextBlock Text="?" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="White"/>
                                 </Button>
-
-                                <Image Source="{Binding Tag, RelativeSource={RelativeSource AncestorType=Button}}" 
-                                        Visibility="{Binding IsFlipped, Converter={StaticResource BoolToVisibilityConverter}}"/>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

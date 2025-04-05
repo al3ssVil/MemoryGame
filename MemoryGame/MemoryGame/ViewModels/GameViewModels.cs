@@ -21,8 +21,8 @@ namespace MemoryGame.ViewModels
         public ICommand SetStandardBoardSizeCommand { get; private set; }
         public ICommand SetCustomBoardSizeCommand { get; private set; }
         public ICommand ShowAboutCommand { get; private set; }
+        public ICommand CardClickedCommand { get; private set; } 
 
-        // Lista de categorii pentru joc
         public ObservableCollection<string> Categories { get; set; }
         public string SelectedCategory { get; set; }
 
@@ -52,9 +52,9 @@ namespace MemoryGame.ViewModels
         List<string> imageNature = new List<string> { };
         List<string> imageFlowers = new List<string> { };
 
-        // Opțiuni pentru rânduri și coloane (dimensiunea personalizată a tablei)
         public ObservableCollection<int> RowOptions { get; set; }
         public ObservableCollection<int> ColumnOptions { get; set; }
+
         private int _selectedRows;
         public int SelectedRows
         {
@@ -64,9 +64,9 @@ namespace MemoryGame.ViewModels
                 if (_selectedRows != value)
                 {
                     _selectedRows = value;
-                    OnPropertyChanged(nameof(SelectedRows)); // Notify UI
+                    OnPropertyChanged(nameof(SelectedRows)); 
                     if(_selectedRows != 0)
-                       GenerateGameBoard(); // Recreate the game board with new dimensions
+                       GenerateGameBoard(); 
                     if (_selectedColumns != 0 && _selectedRows != 0)
                         WelcomeTextVisibility = false;
                 }
@@ -82,9 +82,9 @@ namespace MemoryGame.ViewModels
                 if (_selectedColumns != value)
                 {
                     _selectedColumns = value;
-                    OnPropertyChanged(nameof(SelectedColumns)); // Notify UI
+                    OnPropertyChanged(nameof(SelectedColumns)); 
                     if(_selectedColumns != 0)
-                        GenerateGameBoard(); // Recreate the game board with new dimensions
+                        GenerateGameBoard(); 
                     if(_selectedColumns != 0&&_selectedRows!=0)
                         WelcomeTextVisibility = false;
                 }
@@ -94,10 +94,9 @@ namespace MemoryGame.ViewModels
         public double ButtonWidth { get; set; }
         public double ButtonHeight { get; set; }
 
-        // Lista de carduri pentru joc
         public ObservableCollection<Button> GameCards { get; set; }
 
-        private bool _welcomeTextVisibility = true;  // Textul de bun venit este vizibil la început
+        private bool _welcomeTextVisibility = true; 
 
         public bool WelcomeTextVisibility
         {
@@ -107,17 +106,15 @@ namespace MemoryGame.ViewModels
                 if (_welcomeTextVisibility != value)
                 {
                     _welcomeTextVisibility = value;
-                    OnPropertyChanged(nameof(WelcomeTextVisibility));  // Notifică UI-ul pentru schimbare
+                    OnPropertyChanged(nameof(WelcomeTextVisibility)); 
                 }
             }
         }
 
-        // Constructor
         public GameViewModel()
         {
-            // Inițializarea categoriilor și opțiunilor pentru rânduri/coloane
             Categories = new ObservableCollection<string> { "Animals", "Nature", "Flowers" };
-            SelectedCategory = Categories[0];  // Categorie implicită
+            SelectedCategory = Categories[0]; 
 
             RowOptions = new ObservableCollection<int> { 2, 3, 4, 5, 6 };
             ColumnOptions = new ObservableCollection<int> { 2, 3, 4, 5, 6 };
@@ -127,7 +124,6 @@ namespace MemoryGame.ViewModels
             imageNature.OrderBy(x => rng.Next()).ToList();
             imageFlowers.OrderBy(x => rng.Next()).ToList();
 
-            // Inițializarea comenzilor
             SelectCategoryCommand = new RelayCommand(SelectCategory);
             NewGameCommand = new RelayCommand(NewGame);
             OpenGameCommand = new RelayCommand(OpenGame);
@@ -137,60 +133,50 @@ namespace MemoryGame.ViewModels
             SetStandardBoardSizeCommand = new RelayCommand(SetStandardBoardSize);
             SetCustomBoardSizeCommand = new RelayCommand(SetCustomBoardSize);
             ShowAboutCommand = new RelayCommand(ShowAbout);
+            CardClickedCommand = new RelayCommand(CardClicked);
         }
 
-        // Eveniment pentru PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
-        // Funcție de notificare pentru schimbarea proprietăților
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        // Selecția categoriei
         private void SelectCategory(object category)
         {
             MessageBox.Show($"Category selected: {category}");
-            // Logica pentru a încărca imagini pentru categoria selectată
         }
 
-        // Începerea unui joc nou
         private void NewGame(object obj)
         {
             WelcomeTextVisibility = false;
             MessageBox.Show($"Starting a new game with category: {SelectedCategory} and size: {SelectedRows}x{SelectedColumns}");
-            // Logica pentru a inițializa tabla de joc cu categoria și dimensiunile selectate
             GenerateGameBoard();
         }
 
-        // Deschiderea unui joc salvat
         private void OpenGame(object obj)
         {
             WelcomeTextVisibility = false;
             MessageBox.Show("Opening saved game...");
         }
 
-        // Salvarea jocului
         private void SaveGame(object obj)
         {
             MessageBox.Show("Game saved.");
         }
 
-        // Afișarea statisticilor
         private void ShowStatistics(object obj)
         {
             MessageBox.Show("Showing game statistics...");
         }
 
-        // Ieșirea din joc
         private void Exit(object obj)
         {
             MessageBox.Show("Exiting the game...");
-            Application.Current.Shutdown();  // Închide aplicația
+            Application.Current.Shutdown(); 
         }
 
-        // Selectarea dimensiunii implicite a tablei 4x4
         private void SetStandardBoardSize(object obj)
         {
             MessageBox.Show("Standard board size selected: 4x4");
@@ -199,7 +185,6 @@ namespace MemoryGame.ViewModels
             GenerateGameBoard();
         }
 
-        // Setarea unei dimensiuni personalizate pentru tablă
         private void SetCustomBoardSize(object obj)
         {
             WelcomeTextVisibility = false;
@@ -207,38 +192,34 @@ namespace MemoryGame.ViewModels
             GenerateGameBoard();
         }
 
-        // Afișarea ferestrei "About"
         private void ShowAbout(object obj)
         {
             AboutWindow aboutWindow = new AboutWindow();
             aboutWindow.Show();
         }
 
-        // Metodă pentru generarea tablei de joc
         private void GenerateGameBoard()
         {
             if (SelectedColumns > 0 && SelectedRows > 0)
             {
                 GameCards = new ObservableCollection<Button>();
            
-                // Calculăm lățimea și înălțimea butoanelor
-                ButtonWidth = (9000 - 10 * (SelectedColumns)) / SelectedColumns-20;
-                ButtonHeight = (9000 - 10 * (SelectedRows)) / SelectedRows-20;
+                ButtonWidth = (800 - 10 * (SelectedColumns)) / SelectedColumns-30;
+                ButtonHeight = (800 - 10 * (SelectedRows)) / SelectedRows-30;
+                //MessageBox.Show($"{ButtonWidth}, {ButtonHeight}");
 
-                // Creăm o listă de imagini în funcție de categoria selectată
                 List<string> imagePaths = new List<string>();
 
-                int maxImages = SelectedRows * SelectedColumns / 2;  // Jumătate din numărul total de carduri, pentru perechi
+                int maxImages = SelectedRows * SelectedColumns / 2;  
 
                 if (SelectedCategory == "Animals")
                 {
                     for (int i = 0; i < maxImages; i++)
                     {
-                        // Verifică dacă sunt imagini suficiente
                         if (i < imageAnimals.Count)
                         {
                             imagePaths.Add(imageAnimals[i]);
-                            imagePaths.Add(imageAnimals[i]); // Adăugăm fiecare imagine de două ori pentru a crea perechi
+                            imagePaths.Add(imageAnimals[i]); 
                         }
                     }
                 }
@@ -246,81 +227,79 @@ namespace MemoryGame.ViewModels
                 {
                     for (int i = 0; i < maxImages; i++)
                     {
-                        // Verifică dacă sunt imagini suficiente
                         if (i < imageNature.Count)
                         {
                             imagePaths.Add(imageNature[i]);
-                            imagePaths.Add(imageNature[i]); // Adăugăm fiecare imagine de două ori
+                            imagePaths.Add(imageNature[i]);
                         }
                     }
                 }
-                else // Default pentru "Flowers"
+                else 
                 {
                     for (int i = 0; i < maxImages; i++)
                     {
-                        // Verifică dacă sunt imagini suficiente
                         if (i < imageFlowers.Count)
                         {
                             imagePaths.Add(imageFlowers[i]);
-                            imagePaths.Add(imageFlowers[i]); // Adăugăm fiecare imagine de două ori
+                            imagePaths.Add(imageFlowers[i]); 
                         }
                     }
                 }
 
-                // Amestecăm imaginile pentru a le distribui aleatoriu
                 Random rng = new Random();
                 var shuffledImages = imagePaths.OrderBy(x => rng.Next()).ToList();
 
-                // Adăugăm butoanele în colecția GameCards
                 int imageIndex = 0;
                 for (int i = 0; i < SelectedRows * SelectedColumns; i++)
                 {
                     var cardButton = new Button
                     {
-                        Content = "?",  // Placeholder pentru card
-                        Command = new RelayCommand(CardClicked),
-                        Width = ButtonWidth,  // Setează lățimea calculată
-                        Height = ButtonHeight
+                        Width = ButtonWidth,
+                        Height = ButtonHeight,
+                        Content = "?",
+                        Tag = shuffledImages[imageIndex], 
+                        Background = Brushes.Gray, 
+                        Foreground = Brushes.White,
+                        FontSize = 24,
+                        FontWeight = FontWeights.Bold,
+                        Command = CardClickedCommand,
+                        CommandParameter = null 
                     };
 
-                    var imageBrush = new ImageBrush
-                    {
-                        ImageSource = new BitmapImage(new Uri(shuffledImages[imageIndex], UriKind.Relative))
-                    };
+                    cardButton.CommandParameter = cardButton;
 
-                    // Setează imaginea ca fundal
-                    cardButton.Background = imageBrush;
-
-                    // Asociază imaginea cu butonul folosind un Tag
-                    cardButton.Tag = shuffledImages[imageIndex];
-
-                    // Crește indexul pentru următoarea imagine
                     imageIndex++;
 
-                    // Adăugăm butonul în colecția GameCards
                     GameCards.Add(cardButton);
                 }
 
-                // Notifică UI-ul pentru actualizarea butoanelor
                 OnPropertyChanged(nameof(GameCards));
 
             }
         }
 
-
-        // Handler pentru click-ul pe card (pentru flip)
         private void CardClicked(object obj)
         {
-            Button clickedButton = obj as Button;
-            if (clickedButton != null)
+            MessageBox.Show("Card clicked. Image shown behind the button.");
+            if (obj is Button clickedButton)
             {
-                // Dezactivează butonul și arată imaginea
-                clickedButton.IsEnabled = false;
+                string? imagePath = clickedButton.Tag as string;
 
-                MessageBox.Show("Card clicked. Image shown behind the button.");
+                double buttonWidth = clickedButton.ActualWidth;
+                double buttonHeight = clickedButton.ActualHeight;
+
+                var imageBrush = new ImageBrush
+                {
+                    ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative)),
+                    Stretch = Stretch.Uniform,  
+                    AlignmentX = AlignmentX.Center,
+                    AlignmentY = AlignmentY.Center
+                };
+
+                clickedButton.Background = imageBrush;
+                clickedButton.Content = null; 
+                clickedButton.IsEnabled = false;
             }
         }
-
-       
     }
 }

@@ -30,7 +30,6 @@ namespace MemoryGame.ViewModels
         protected void OnPropertyChanged(string prop) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
 
-
         public string? NewUserName//accept null
         {
 
