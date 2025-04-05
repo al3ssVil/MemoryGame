@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\AboutBackground.jpg" />
     <None Remove="Images\background.jpg" />
+    <None Remove="Images\BackgroundGame.jpg" />
     <None Remove="Images\Image1.jpg" />
     <None Remove="Images\Image10.jpg" />
     <None Remove="Images\Image11.jpg" />
@@ -33,6 +35,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\AboutBackground.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\BackgroundGame.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Image20.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -97,6 +105,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Image9.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\SidebarBackground.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

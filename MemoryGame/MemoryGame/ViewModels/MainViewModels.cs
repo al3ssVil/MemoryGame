@@ -6,6 +6,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using System.Text.Json;
+using MemoryGame.Views;
 
 namespace MemoryGame.ViewModels
 {
@@ -30,9 +31,11 @@ namespace MemoryGame.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
 
 
-        public string NewUserName
+        public string? NewUserName//accept null
         {
+
             get => newUserName;
+
             set
             {
                 newUserName = value;
@@ -40,8 +43,9 @@ namespace MemoryGame.ViewModels
             }
         }
 
-        public User SelectedUser
+        public User? SelectedUser
         {
+           
             get => selectedUser;
             set
             {
@@ -50,7 +54,7 @@ namespace MemoryGame.ViewModels
                 OnPropertyChanged(nameof(CanPlayOrDelete));
                 if (selectedUser != null)
                 {
-                    SelectedImage = selectedUser.ImagePath; // Schimbăm imaginea când selectăm un utilizator
+                    SelectedImage = selectedUser.ImagePath; 
                 }
             }
         }
@@ -79,7 +83,7 @@ namespace MemoryGame.ViewModels
             "../Images/Image20.jpg"
         };
 
-        public string SelectedImage
+        public string? SelectedImage
         {
             get => selectedImage;
             set
@@ -111,8 +115,7 @@ namespace MemoryGame.ViewModels
         {
             if (string.IsNullOrWhiteSpace(NewUserName))
             {
-                // Dacă nu s-a introdus un nume, afișăm un mesaj de avertizare
-                MessageBox.Show("Te rugăm să introduci un nume pentru utilizator.", "Nume lipsă", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Please enter a name for the user.", "Missing Name", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -120,15 +123,16 @@ namespace MemoryGame.ViewModels
             {
                 if (user.Name != null && user.Name.Equals(NewUserName, StringComparison.OrdinalIgnoreCase))
                 {
-                    // Dacă numele există, afișăm un mesaj de eroare
-                    MessageBox.Show("Numele introdus este deja existent! Alegeți un alt nume.", "Eroare", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("The entered name already exists! Please choose another name.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
             }
-            // Dacă numele nu există, adăugăm utilizatorul în listă
-            var newUser = new User { Name = NewUserName, ImagePath = SelectedImage };
+            var imageToUse = SelectedImage ?? "../Images/Image1.jpg";
+
+            var newUser = new User { Name = NewUserName, ImagePath = imageToUse };
             Users.Add(newUser);
             SaveUsers();
+            NewUserName = string.Empty;
         }
 
         private void DeleteUser()
@@ -142,8 +146,8 @@ namespace MemoryGame.ViewModels
 
         private void PlayGame()
         {
-            MessageBox.Show($"Hai la joc, {SelectedUser?.Name}!");
-            // Deschizi fereastra cu jocul aici
+            GameWindow gameWindow = new GameWindow();
+            gameWindow.Show();
         }
 
         private void NextImage()

@@ -5,10 +5,55 @@
         Title="Sign In" Height="400" Width="500"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize" >
+    
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="Border"
+                 Background="{TemplateBinding Background}"
+                 BorderBrush="{TemplateBinding BorderBrush}"
+                 BorderThickness="0"
+                 CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
 
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="darkGreen"/>
+                                <Setter TargetName="Border" Property="Opacity" Value="1"/>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="darkGreen"/>
+                                <Setter TargetName="Border" Property="Opacity" Value="0.7"/>
+                            </Trigger>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="darkGreen"/>
+                                <Setter TargetName="Border" Property="Opacity" Value="0.9"/>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="darkGreen"/>
+                                <Setter TargetName="Border" Property="Opacity" Value="0.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="FontFamily" Value="Segoe Script"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </Window.Resources>
+    
     <Window.Background>
-        <!-- Folosim un ImageBrush pentru a pune imaginea de fundal -->
-        <ImageBrush ImageSource="../../../Images/background.jpg" Stretch="Fill"/>
+        <ImageBrush ImageSource="../Images/background.jpg" Stretch="Fill"/>
     </Window.Background>
 
     <Window.DataContext>
@@ -18,9 +63,7 @@
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <!-- Conținut -->
             <RowDefinition Height="Auto" />
-            <!-- Butoane jos -->
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -28,7 +71,6 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Lista utilizatorilor -->
         <ListBox ItemsSource="{Binding Users}"
          SelectedItem="{Binding SelectedUser}"
          DisplayMemberPath="Name"
@@ -48,7 +90,6 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <!-- Preview imagine + butoane stânga/dreapta -->
         <Grid Grid.Row="0" Grid.Column="1" Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -56,7 +97,6 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- Imagine -->
             <Image Source="{Binding SelectedImage}"
                    Stretch="Uniform"
                    Height="200"
@@ -64,15 +104,12 @@
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center" />
 
-            <!-- Butoane stânga/dreapta -->
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
                 <Button Content="←" Width="40" Command="{Binding PreviousImageCommand}" />
                 <Button Content="→" Width="40" Command="{Binding NextImageCommand}" Margin="10,0,0,0" />
             </StackPanel>
 
-            <!-- TextBox pentru numele utilizatorului -->
             <StackPanel Grid.Row="2" HorizontalAlignment="Center" Margin="10">
-                <!-- TextBlock cu fontul Segoe Script -->
                 <TextBlock Text="Introduceți numele utilizatorului:" 
                            VerticalAlignment="Center" 
                            FontFamily="Segoe Script" 
@@ -81,7 +118,6 @@
                            FontWeight="DemiBold"
                            Foreground="Black" />
 
-                <!-- TextBox cu fontul Segoe Script -->
                 <TextBox Text="{Binding NewUserName}" 
                          Width="200" 
                          Margin="0,0,0,10"
@@ -95,7 +131,6 @@
             </StackPanel>
         </Grid>
 
-        <!-- Butoane jos -->
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,20,0,0">
             <Button Content="New User" Command="{Binding NewUserCommand}" Height="20" Width="80" Margin="0,0,30,0"/>
             <Button Content="Delete User" Command="{Binding DeleteUserCommand}" Height="20" Width="80" IsEnabled="{Binding CanPlayOrDelete}" Margin="0,0,30,0"/>

@@ -1,0 +1,140 @@
+﻿<Window x:Class="MemoryGame.Views.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MemoryGame.Views"
+        xmlns:vm="clr-namespace:MemoryGame.ViewModels"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="MemoryGame" Height="700" Width="900">
+
+    <Window.DataContext>
+        <vm:GameViewModel />
+    </Window.DataContext>
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Segoe Script"/>
+            <Setter Property="Background" Value="#FF34495E"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="8 4"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF1ABC9C"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Image Source="../Images/SidebarBackground.jpg"
+           Stretch="Fill"
+           Opacity="1"
+           Panel.ZIndex="0"/>
+
+            <StackPanel Background="#802C3E50" Panel.ZIndex="1" >
+                <TextBlock Text="Menu" FontFamily="Segoe Script" FontSize="22" Foreground="White" Margin="0 0 0 20" HorizontalAlignment="Center"/>
+
+                <TextBlock Text="File" Foreground="White" FontWeight="Bold"  FontFamily="Segoe Script" FontSize="16"/>
+                <ComboBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" Margin="0 5 0 10" FontFamily="Segoe Script" />
+                <Button Content="🎮New Game" Command="{Binding NewGameCommand}" Margin="0 10"/>
+                <Button Content="📂Open Game" Command="{Binding OpenGameCommand}" Margin="0 10"/>
+                <Button Content="💾 Save Game" Command="{Binding SaveGameCommand}" Margin="0 10"/>
+                <Button Content="📊Statistics" Command="{Binding ShowStatisticsCommand}" Margin="0 10"/>
+                <Button Content="🚪Exit" Command="{Binding ExitCommand}" Margin="0 20 0 20" Background="DarkRed" Foreground="White"/>
+
+                <TextBlock Text="Options" FontFamily="Segoe Script" Foreground="White" FontWeight="Bold" />
+                <Button Content="Standard (4x4)" Command="{Binding SetStandardBoardSizeCommand}" Margin="0 10"/>
+
+                <StackPanel Orientation="Horizontal" Margin="0 10">
+                    <TextBlock Text="M:" FontFamily="Segoe Script" Foreground="White" VerticalAlignment="Center" Margin="0 0 5 0"/>
+                    <ComboBox Width="40" FontFamily="Segoe Script" ItemsSource="{Binding RowOptions}" 
+                              SelectedItem="{Binding SelectedRows}" 
+                              DisplayMemberPath="."/>
+
+                    <TextBlock Text="N:" FontFamily="Segoe Script" Foreground="White" VerticalAlignment="Center" Margin="10 0 5 0"/>
+                    <ComboBox Width="40" FontFamily="Segoe Script" ItemsSource="{Binding ColumnOptions}" 
+                              SelectedItem="{Binding SelectedColumns}"
+                              DisplayMemberPath="."/>
+                </StackPanel>
+                
+                <Button Content="Apply Custom Size" Command="{Binding SetCustomBoardSizeCommand}" Margin="0 10"/>
+
+                <TextBlock Text="Help" FontFamily="Segoe Script" Foreground="White" FontWeight="Bold" Margin="0 10 0 0"/>
+                <Button Content="❓About" Command="{Binding ShowAboutCommand}" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Image Source="../Images/BackgroundGame.jpg"
+           Stretch="Fill"
+           Opacity="0.8"
+           Panel.ZIndex="0" />
+
+            <Grid Panel.ZIndex="1">
+                <TextBlock Text="Welcome to Memory Game"
+                   FontSize="30"
+                   FontWeight="SemiBold"
+                   Foreground="Black"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontFamily="Segoe Script" 
+                   Visibility="{Binding WelcomeTextVisibility, Converter={StaticResource BoolToVisibilityConverter}}" />
+
+                <Grid x:Name="GameBoardGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="600" Height="600"/>
+                    <ItemsControl ItemsSource="{Binding GameCards}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="{Binding SelectedColumns}" Rows="{Binding SelectedRows}"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <!-- Butonul cu semnul de întrebare -->
+                                <Button BorderBrush="Black" BorderThickness="2"
+                                        Width="{Binding DataContext.ButtonWidth, RelativeSource={RelativeSource AncestorType=Window}}"
+                                        Height="{Binding DataContext.ButtonHeight, RelativeSource={RelativeSource AncestorType=Window}}"
+                                        Command="{Binding DataContext.CardClicked, RelativeSource={RelativeSource AncestorType=Window}}">
+                                    <TextBlock Text="?" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="White"/>
+                                </Button>
+
+                                <Image Source="{Binding Tag, RelativeSource={RelativeSource AncestorType=Button}}" 
+                                        Visibility="{Binding IsFlipped, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+        </Grid>
+    </Grid>
+</Window>

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\vilcu\Desktop\projects\MemoryGame\MemoryGame\MemoryGame\App.xaml
-1-1644662438
+3628805550
 
-7156792519
+10-1894806514
 198-352714763
-Views\MainWindow.xaml;
+Views\AboutWindow.xaml;Views\GameWindow.xaml;Views\MainWindow.xaml;
 
 False
 
