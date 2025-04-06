@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:MemoryGame.ViewModels"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="MemoryGame" Height="700" Width="900">
+        Title="MemoryGame" Height="700" Width="940">
 
     <Window.DataContext>
         <vm:GameViewModel />
@@ -62,20 +62,20 @@
            Panel.ZIndex="0"/>
 
             <StackPanel Background="#802C3E50" Panel.ZIndex="1" >
-                <TextBlock Text="Menu" FontFamily="Segoe Script" FontSize="22" Foreground="White" Margin="0 0 0 20" HorizontalAlignment="Center"/>
+                <TextBlock Text="Menu" FontFamily="Segoe Script" FontSize="22" Foreground="White" Margin="0 0 0 10" HorizontalAlignment="Center"/>
 
                 <TextBlock Text="File" Foreground="White" FontWeight="Bold"  FontFamily="Segoe Script" FontSize="16"/>
-                <ComboBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" Margin="0 5 0 10" FontFamily="Segoe Script" />
-                <Button Content="🎮New Game" Command="{Binding NewGameCommand}" Margin="0 10"/>
-                <Button Content="📂Open Game" Command="{Binding OpenGameCommand}" Margin="0 10"/>
-                <Button Content="💾 Save Game" Command="{Binding SaveGameCommand}" Margin="0 10"/>
-                <Button Content="📊Statistics" Command="{Binding ShowStatisticsCommand}" Margin="0 10"/>
-                <Button Content="🚪Exit" Command="{Binding ExitCommand}" Margin="0 20 0 20" Background="DarkRed" Foreground="White"/>
+                <ComboBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" Margin="0 5 0 5" FontFamily="Segoe Script" />
+                <Button Content="🎮New Game" Command="{Binding NewGameCommand}" Margin="0 5"/>
+                <Button Content="📂Open Game" Command="{Binding OpenGameCommand}" Margin="0 5"/>
+                <Button Content="💾 Save Game" Command="{Binding SaveGameCommand}" Margin="0 5"/>
+                <Button Content="📊Statistics" Command="{Binding ShowStatisticsCommand}" Margin="0 5"/>
+                <Button Content="🚪Exit" Command="{Binding ExitCommand}" Margin="0 20 0 10" Background="DarkRed" Foreground="White"/>
 
                 <TextBlock Text="Options" FontFamily="Segoe Script" Foreground="White" FontWeight="Bold" />
-                <Button Content="Standard (4x4)" Command="{Binding SetStandardBoardSizeCommand}" Margin="0 10"/>
+                <Button Content="Standard (4x4)" Command="{Binding SetStandardBoardSizeCommand}" Margin="0 5"/>
 
-                <StackPanel Orientation="Horizontal" Margin="0 10">
+                <StackPanel Orientation="Horizontal" Margin="0 5">
                     <TextBlock Text="M:" FontFamily="Segoe Script" Foreground="White" VerticalAlignment="Center" Margin="0 0 5 0"/>
                     <ComboBox Width="40" FontFamily="Segoe Script" ItemsSource="{Binding RowOptions}" 
                               SelectedItem="{Binding SelectedRows}" 
@@ -86,7 +86,9 @@
                               SelectedItem="{Binding SelectedColumns}"
                               DisplayMemberPath="."/>
                 </StackPanel>
-                
+                <TextBlock Text="Customizable Timert(seconds):" Foreground="White" VerticalAlignment="Center" Margin="0 5" FontFamily="Segoe Script"/>
+                <TextBox Width="50" Text="{Binding CustomTimer}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"  FontFamily="Segoe Script"/>
+                <Button Content="Setează Timer" Command="{Binding SetCustomTimerCommand}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5"/>
                 <Button Content="Apply Custom Size" Command="{Binding SetCustomBoardSizeCommand}" Margin="0 10"/>
 
                 <TextBlock Text="Help" FontFamily="Segoe Script" Foreground="White" FontWeight="Bold" Margin="0 10 0 0"/>
@@ -100,7 +102,16 @@
            Opacity="0.8"
            Panel.ZIndex="0" />
 
-            <Grid Panel.ZIndex="1">
+            <TextBlock Text="{Binding ElapsedTime}" 
+                       FontSize="24" 
+                       FontWeight="Bold" 
+                       Foreground="White" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Top" 
+                       Margin="0,10,0,0"
+                       FontFamily="egoe Script" Width="16"/>
+
+            <Grid Panel.ZIndex="1" Margin="0,50,0,0">
                 <TextBlock Text="Welcome to Memory Game"
                    FontSize="30"
                    FontWeight="SemiBold"
@@ -108,10 +119,11 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontFamily="Segoe Script" 
+                   Margin="0,-50,0,0"
                    Visibility="{Binding WelcomeTextVisibility, Converter={StaticResource BoolToVisibilityConverter}}" />
 
-                <Grid x:Name="GameBoardGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="600" Height="600"/>
-                    <ItemsControl ItemsSource="{Binding GameCards}">
+                <Grid x:Name="GameBoardGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="600" Height="600" />
+                <ItemsControl ItemsSource="{Binding GameCards}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="{Binding SelectedColumns}" Rows="{Binding SelectedRows}"/>
@@ -128,8 +140,8 @@
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </Grid>
+                </ItemsControl>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

@@ -7,9 +7,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
-using static System.Net.Mime.MediaTypeNames;
-using MemoryGame.Models;
 using Application = System.Windows.Application;
+using System.Windows.Threading;
+#pragma warning disable CS8622
+#pragma warning disable CS8618
 
 namespace MemoryGame.ViewModels
 {
@@ -25,6 +26,7 @@ namespace MemoryGame.ViewModels
         public ICommand SetCustomBoardSizeCommand { get; private set; }
         public ICommand ShowAboutCommand { get; private set; }
         public ICommand CardClickedCommand { get; private set; } 
+
 
         public ObservableCollection<string> Categories { get; set; }
         public string SelectedCategory { get; set; }
@@ -54,6 +56,7 @@ namespace MemoryGame.ViewModels
         };
         List<string> imageNature = new List<string> { };
         List<string> imageFlowers = new List<string> { };
+
 
         public ObservableCollection<Button> GameCards { get; set; }
 
@@ -102,8 +105,8 @@ namespace MemoryGame.ViewModels
         public double ButtonWidth { get; set; }
         public double ButtonHeight { get; set; }
 
-        private bool _welcomeTextVisibility = true; 
 
+        private bool _welcomeTextVisibility = true; 
         public bool WelcomeTextVisibility
         {
             get { return _welcomeTextVisibility; }
@@ -115,6 +118,35 @@ namespace MemoryGame.ViewModels
                     OnPropertyChanged(nameof(WelcomeTextVisibility)); 
                 }
             }
+        }
+
+        private DispatcherTimer _gameTimer;
+        private int _elapsedTime; 
+        public int ElapsedTime
+        {
+            get { return _elapsedTime; }
+            set
+            {
+                if (_elapsedTime != value)
+                {
+                    _elapsedTime = value;
+                    OnPropertyChanged(nameof(ElapsedTime)); 
+                }
+            }
+        }
+
+        public int CustomTimer { get; set; } = 60; 
+
+        public bool IsTimerRunning { get; private set; } = false; 
+
+        public ICommand StartTimerCommand { get; private set; }
+
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public GameViewModel()
@@ -129,7 +161,6 @@ namespace MemoryGame.ViewModels
             imageAnimals.OrderBy(x => rng.Next()).ToList();
             imageNature.OrderBy(x => rng.Next()).ToList();
             imageFlowers.OrderBy(x => rng.Next()).ToList();
-
             SelectCategoryCommand = new RelayCommand(SelectCategory);
             NewGameCommand = new RelayCommand(NewGame);
             OpenGameCommand = new RelayCommand(OpenGame);
@@ -140,13 +171,45 @@ namespace MemoryGame.ViewModels
             SetCustomBoardSizeCommand = new RelayCommand(SetCustomBoardSize);
             ShowAboutCommand = new RelayCommand(ShowAbout);
             CardClickedCommand = new RelayCommand(CardClicked);
+
+            _gameTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1) 
+            };
+            _gameTimer.Tick += OnTimerTick; 
+
+            StartTimerCommand = new RelayCommand(StartTimer);
+        }
+        private void StartTimer(object? obj)
+        {
+            if (!IsTimerRunning)
+            {
+                _elapsedTime = 60; 
+                _gameTimer.Start();
+                IsTimerRunning = true;
+                OnPropertyChanged(nameof(IsTimerRunning)); 
+            }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
+        private void OnTimerTick(object sender, EventArgs e)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (_elapsedTime > 0)  
+            {
+                _elapsedTime--;  
+            }
+
+            if (_elapsedTime == 0)  
+            {
+                _gameTimer.Stop();  
+                IsTimerRunning = false;  
+                OnPropertyChanged(nameof(IsTimerRunning));  
+                MessageBox.Show("Timpul a expirat!");  
+            }
+        }
+        private void StopTimer()
+        {
+            _gameTimer.Stop();
+            IsTimerRunning = false;
         }
 
         private void SelectCategory(object category)
@@ -159,6 +222,7 @@ namespace MemoryGame.ViewModels
             WelcomeTextVisibility = false;
             MessageBox.Show($"Starting a new game with category: {SelectedCategory} and size: {SelectedRows}x{SelectedColumns}");
             GenerateGameBoard();
+            StartTimer(null);
         }
 
         private void OpenGame(object obj)
@@ -210,12 +274,12 @@ namespace MemoryGame.ViewModels
             {
                 GameCards = new ObservableCollection<Button>();
 
-                double windowWidth = Application.Current.MainWindow.ActualWidth ;
-                double windowHeight = Application.Current.MainWindow.ActualHeight;
+                double windowWidth = Application.Current.MainWindow.ActualWidth;
+                double windowHeight = Application.Current.MainWindow.ActualHeight-50;
+
                 MessageBox.Show($"{windowWidth}, {windowHeight}");
-                ButtonWidth = windowWidth / SelectedColumns-100;
-                ButtonHeight = windowHeight / SelectedRows-20;
-                //MessageBox.Show($"{ButtonWidth}, {ButtonHeight}");
+                ButtonWidth = windowWidth / SelectedColumns-15*SelectedColumns;
+                ButtonHeight = windowHeight / SelectedRows-10*SelectedRows;
 
                 List<string> imagePaths = new List<string>();
 
@@ -295,7 +359,7 @@ namespace MemoryGame.ViewModels
             {
                 string? imagePath = clickedButton.Tag as string;
 
-                if (clickedButton.IsEnabled)
+                if (clickedButton.IsEnabled && imagePath!=null)
                 {
                     double buttonWidth = clickedButton.ActualWidth;
                     double buttonHeight = clickedButton.ActualHeight;
@@ -352,3 +416,5 @@ namespace MemoryGame.ViewModels
         }
     }
 }
+#pragma warning restore CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
+#pragma warning restore CS8618
