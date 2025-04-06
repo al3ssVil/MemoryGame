@@ -37,7 +37,7 @@
   {
     "Name": "123456",
     "ImagePath": "../Images/Image6.jpg",
-    "GamesWon": 1,
+    "GamesWon": 4,
     "GamesLost": 0,
     "GameHistory": [
       {
@@ -45,6 +45,27 @@
         "Columns": 2,
         "Category": "Animals",
         "TimeRemain": 5,
+        "IsWon": true
+      },
+      {
+        "Rows": 2,
+        "Columns": 3,
+        "Category": "Animals",
+        "TimeRemain": 43,
+        "IsWon": true
+      },
+      {
+        "Rows": 2,
+        "Columns": 3,
+        "Category": "Animals",
+        "TimeRemain": 38,
+        "IsWon": true
+      },
+      {
+        "Rows": 2,
+        "Columns": 3,
+        "Category": "Animals",
+        "TimeRemain": 43,
         "IsWon": true
       }
     ]

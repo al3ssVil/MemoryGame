@@ -113,7 +113,6 @@ namespace MemoryGame.ViewModels
                 }
             }
         }
-
         public double ButtonWidth { get; set; }
         public double ButtonHeight { get; set; }
 
@@ -413,13 +412,132 @@ namespace MemoryGame.ViewModels
 
         private void OpenGame(object obj)
         {
-            WelcomeTextVisibility = false;
-            MessageBox.Show("Opening saved game...");
+            try
+            {
+                WelcomeTextVisibility = false;
+                if (File.Exists("../../../Data/saved_game.json"))
+                {
+                    string json = File.ReadAllText("../../../Data/saved_game.json");
+                    var savedGame = JsonSerializer.Deserialize<SavedGame>(json);
+
+                    if (savedGame != null)
+                    {
+                        if (savedGame.PlayerName == SelectedUser.Name)
+                        {
+                            _elapsedTime = savedGame.TimeRemaining;
+                            SelectedRows = savedGame.Rows;
+                            SelectedColumns = savedGame.Columns;
+
+                            GameCards = new ObservableCollection<Button>();
+
+                            double windowWidth = Application.Current.MainWindow.ActualWidth - 200;
+                            double windowHeight = Application.Current.MainWindow.ActualHeight - 50;
+
+                            ButtonWidth = windowWidth / SelectedColumns - 5 * SelectedColumns;
+                            ButtonHeight = windowHeight / SelectedRows - 5 * SelectedRows;
+
+                            foreach (var cardState in savedGame.CardStates)
+                            {
+                                var cardButton = new Button
+                                {
+                                    Width = ButtonWidth,
+                                    Height = ButtonHeight,
+                                    Tag = cardState.Tag,
+                                    Background = cardState.IsFlipped ? Brushes.Transparent : Brushes.Gray,
+                                    Foreground = Brushes.White,
+                                    FontSize = 24,
+                                    FontWeight = FontWeights.Bold,
+                                    Command = CardClickedCommand,
+                                    CommandParameter = null,
+                                };
+
+                                if (cardState.IsFlipped)
+                                {
+                                    cardButton.Background = new ImageBrush
+                                    {
+                                        ImageSource = new BitmapImage(new Uri(cardState.ImagePath, UriKind.Relative)),
+                                        Stretch = Stretch.Uniform
+                                    };
+                                    cardButton.IsEnabled = false;
+                                }
+                                else
+                                {
+                                    cardButton.Content = "?";
+                                    cardButton.CommandParameter = cardButton; // așa trimitem butonul la click
+                                }
+
+                                GameCards.Add(cardButton);
+                            }
+                            OnPropertyChanged(nameof(SelectedRows));
+                            OnPropertyChanged(nameof(SelectedColumns));
+
+                            OnPropertyChanged(nameof(GameCards));
+
+                            _gameTimer.Start();
+                            IsTimerRunning = true;
+                            OnPropertyChanged(nameof(IsTimerRunning));
+                            OnPropertyChanged(nameof(ElapsedTime));
+
+                            MessageBox.Show("Game loaded successfully.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No saved game found for this user.");
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No saved game found.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading the game: {ex.Message}");
+            }
         }
 
         private void SaveGame(object obj)
         {
-            MessageBox.Show("Game saved.");
+            try
+            {
+                var savedGame = new SavedGame
+                {
+                    PlayerName = SelectedUser?.Name,
+                    TimeRemaining = _elapsedTime,
+                    Rows = SelectedRows,
+                    Columns = SelectedColumns
+                };
+
+                StopTimer();
+
+                foreach (var card in GameCards)
+                {
+                    if (card.Tag is string imagePath) 
+                    {
+                        var cardState = new CardState
+                        {
+                            ImagePath = imagePath,
+                            Content = card.Content?.ToString(),
+                            Tag = card.Tag?.ToString(),
+                            IsFlipped = !(bool)card.IsEnabled
+                        };
+
+                        savedGame.CardStates.Add(cardState);
+                    }
+                }
+
+                string json = JsonSerializer.Serialize(savedGame, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText("../../../Data/saved_game.json", json);
+
+                ResetGame();
+
+                MessageBox.Show("Game saved.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving the game: {ex.Message}");
+            }
         }
 
         private void ShowStatistics(object obj)
