@@ -66,6 +66,20 @@ namespace MemoryGame.ViewModels
         public ObservableCollection<int> RowOptions { get; set; }
         public ObservableCollection<int> ColumnOptions { get; set; }
 
+        private bool _isGameInActive = true;
+        public bool IsGameInactive
+        {
+            get { return _isGameInActive; }
+            set
+            {
+                if (_isGameInActive != value)
+                {
+                    _isGameInActive = value;
+                    OnPropertyChanged(nameof(IsGameInactive));
+                }
+            }
+        }
+
         private int _selectedRows;
         public int SelectedRows
         {
@@ -75,9 +89,9 @@ namespace MemoryGame.ViewModels
                 if (_selectedRows != value)
                 {
                     _selectedRows = value;
-                    OnPropertyChanged(nameof(SelectedRows)); 
-                    if(_selectedRows != 0)
-                       GenerateGameBoard(); 
+                    //OnPropertyChanged(nameof(SelectedRows)); 
+                    //if(_selectedRows != 0)
+                      // GenerateGameBoard(); 
                     if (_selectedColumns != 0 && _selectedRows != 0)
                         WelcomeTextVisibility = false;
                 }
@@ -93,9 +107,9 @@ namespace MemoryGame.ViewModels
                 if (_selectedColumns != value)
                 {
                     _selectedColumns = value;
-                    OnPropertyChanged(nameof(SelectedColumns)); 
-                    if(_selectedColumns != 0)
-                        GenerateGameBoard(); 
+                    //OnPropertyChanged(nameof(SelectedColumns)); 
+                    //if(_selectedColumns != 0)
+                        //GenerateGameBoard(); 
                     if(_selectedColumns != 0&&_selectedRows!=0)
                         WelcomeTextVisibility = false;
                 }
@@ -135,7 +149,25 @@ namespace MemoryGame.ViewModels
             }
         }
 
-        public int CustomTimer { get; set; } = 60; 
+        private int _customTimer=60;
+        public int CustomTimer
+        {
+            get { return _customTimer; }
+            set
+            {
+                if (_customTimer != value)
+                {
+                    if (value < 0 || value == 0)
+                        MessageBox.Show("Invalid value, enter another one");
+                    else
+                    {
+                        _customTimer = value;
+                        OnPropertyChanged(nameof(CustomTimer));
+                    }
+                }
+            }
+        }
+
 
         public bool IsTimerRunning { get; private set; } = false; 
 
@@ -182,28 +214,48 @@ namespace MemoryGame.ViewModels
         }
         private void StartTimer(object? obj)
         {
-            if (!IsTimerRunning)
+            if (SelectedColumns == 4 && SelectedRows == 4)
+                _elapsedTime = 60;
+            else
             {
-                _elapsedTime = 60; 
-                _gameTimer.Start();
-                IsTimerRunning = true;
-                OnPropertyChanged(nameof(IsTimerRunning)); 
+                _elapsedTime = CustomTimer;
+                if (_elapsedTime<=0)
+                {
+                    MessageBox.Show("Please enter a positive timer in order to start the game");
+                    return;
+                }   
             }
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                ElapsedTime = _elapsedTime;  
+            });
+            _gameTimer.Start();
+            IsTimerRunning = true;
+            OnPropertyChanged(nameof(IsTimerRunning));
+            OnPropertyChanged(nameof(ElapsedTime));
         }
 
         private void OnTimerTick(object sender, EventArgs e)
         {
-            if (_elapsedTime > 0)  
+            if (_elapsedTime > 0)
             {
-                _elapsedTime--;  
+                _elapsedTime--;
+                ElapsedTime = _elapsedTime;  // Acesta va actualiza binding-ul pe UI
+                OnPropertyChanged(nameof(ElapsedTime));
             }
 
             if (_elapsedTime == 0)  
             {
+                StopTimer();
                 _gameTimer.Stop();  
                 IsTimerRunning = false;  
-                OnPropertyChanged(nameof(IsTimerRunning));  
-                MessageBox.Show("Timpul a expirat!");  
+                OnPropertyChanged(nameof(IsTimerRunning));
+                IsGameInactive = true;
+                foreach (var card in GameCards.ToList())
+                {
+                    GameCards.Remove(card);
+                }
+                MessageBox.Show("You ran out of time!");  
             }
         }
         private void StopTimer()
@@ -214,15 +266,26 @@ namespace MemoryGame.ViewModels
 
         private void SelectCategory(object category)
         {
-            MessageBox.Show($"Category selected: {category}");
+            //MessageBox.Show($"Category selected: {category}");
         }
 
         private void NewGame(object obj)
         {
-            WelcomeTextVisibility = false;
-            MessageBox.Show($"Starting a new game with category: {SelectedCategory} and size: {SelectedRows}x{SelectedColumns}");
-            GenerateGameBoard();
-            StartTimer(null);
+            if (SelectedColumns % 2 == 1 && SelectedRows % 2 == 1)
+            {
+                MessageBox.Show("It must be an even number of cards, choose other values");
+                return;
+            }
+            if (SelectedColumns != 0 && SelectedRows != 0)
+            {
+                IsGameInactive = false;
+                WelcomeTextVisibility = false;
+                //MessageBox.Show($"Starting a new game with category: {SelectedCategory} and size: {SelectedRows}x{SelectedColumns}");
+                OnPropertyChanged(nameof(SelectedRows));
+                OnPropertyChanged(nameof(SelectedColumns));
+                GenerateGameBoard();
+                StartTimer(null);
+            }
         }
 
         private void OpenGame(object obj)
@@ -244,22 +307,20 @@ namespace MemoryGame.ViewModels
         private void Exit(object obj)
         {
             MessageBox.Show("Exiting the game...");
-            Application.Current.MainWindow.Close();
+            Application.Current.Shutdown();
         }
 
         private void SetStandardBoardSize(object obj)
         {
-            MessageBox.Show("Standard board size selected: 4x4");
+            //MessageBox.Show("Standard board size selected: 4x4");
             SelectedRows = 4;
             SelectedColumns = 4;
-            GenerateGameBoard();
         }
 
         private void SetCustomBoardSize(object obj)
         {
             WelcomeTextVisibility = false;
-            MessageBox.Show($"Custom board size selected: {SelectedRows}x{SelectedColumns}");
-            GenerateGameBoard();
+            //MessageBox.Show($"Custom board size selected: {SelectedRows}x{SelectedColumns}");
         }
 
         private void ShowAbout(object obj)
@@ -277,7 +338,7 @@ namespace MemoryGame.ViewModels
                 double windowWidth = Application.Current.MainWindow.ActualWidth;
                 double windowHeight = Application.Current.MainWindow.ActualHeight-50;
 
-                MessageBox.Show($"{windowWidth}, {windowHeight}");
+                //MessageBox.Show($"{windowWidth}, {windowHeight}");
                 ButtonWidth = windowWidth / SelectedColumns-15*SelectedColumns;
                 ButtonHeight = windowHeight / SelectedRows-10*SelectedRows;
 
