@@ -1,26 +1,52 @@
 [
   {
     "Name": "andrei",
-    "ImagePath": "../Images/Image14.jpg"
+    "ImagePath": "../Images/Image14.jpg",
+    "GamesWon": 0,
+    "GamesLost": 0,
+    "GameHistory": []
   },
   {
     "Name": "nicol",
-    "ImagePath": "../Images/Image11.jpg"
+    "ImagePath": "../Images/Image11.jpg",
+    "GamesWon": 0,
+    "GamesLost": 0,
+    "GameHistory": []
   },
   {
     "Name": "iulia",
-    "ImagePath": "../Images/Image17.jpg"
+    "ImagePath": "../Images/Image17.jpg",
+    "GamesWon": 0,
+    "GamesLost": 0,
+    "GameHistory": []
   },
   {
     "Name": "al3ss",
-    "ImagePath": "../Images/Image18.jpg"
+    "ImagePath": "../Images/Image18.jpg",
+    "GamesWon": 0,
+    "GamesLost": 0,
+    "GameHistory": []
   },
   {
     "Name": "mihai",
-    "ImagePath": "../Images/Image19.jpg"
+    "ImagePath": "../Images/Image19.jpg",
+    "GamesWon": 0,
+    "GamesLost": 0,
+    "GameHistory": []
   },
   {
-    "Name": "56",
-    "ImagePath": "../Images/Image2.jpg"
+    "Name": "123456",
+    "ImagePath": "../Images/Image6.jpg",
+    "GamesWon": 1,
+    "GamesLost": 0,
+    "GameHistory": [
+      {
+        "Rows": 2,
+        "Columns": 2,
+        "Category": "Animals",
+        "TimeRemain": 5,
+        "IsWon": true
+      }
+    ]
   }
 ]

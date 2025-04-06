@@ -146,6 +146,13 @@ namespace MemoryGame.ViewModels
         private void PlayGame()
         {
             GameWindow gameWindow = new GameWindow();
+            var gameViewModel = gameWindow.DataContext as GameViewModel;
+
+            if (gameViewModel != null)
+            {
+                gameViewModel.SelectedUser = SelectedUser;
+            }
+
             gameWindow.Show();
             Application.Current.MainWindow.Close();
         }

@@ -32,6 +32,11 @@
     <None Remove="Images\Image7.jpg" />
     <None Remove="Images\Image8.jpg" />
     <None Remove="Images\Image9.jpg" />
+    <None Remove="Images\StatisticsBackground.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MiNET" Version="1.0.2304" />
   </ItemGroup>
 
   <ItemGroup>
@@ -108,6 +113,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\SidebarBackground.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\StatisticsBackground.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

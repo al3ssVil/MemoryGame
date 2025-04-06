@@ -65,11 +65,11 @@
                 <TextBlock Text="Menu" FontFamily="Segoe Script" FontSize="22" Foreground="White" Margin="0 0 0 10" HorizontalAlignment="Center"/>
 
                 <TextBlock Text="File" Foreground="White" FontWeight="Bold"  FontFamily="Segoe Script" FontSize="16"/>
-                <ComboBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" Margin="0 5 0 5" FontFamily="Segoe Script"  IsEnabled="{Binding IsGameInactive}" />
-                <Button Content="🎮New Game" Command="{Binding NewGameCommand}" Margin="0 5"/>
-                <Button Content="📂Open Game" Command="{Binding OpenGameCommand}" Margin="0 5"/>
-                <Button Content="💾 Save Game" Command="{Binding SaveGameCommand}" Margin="0 5"/>
-                <Button Content="📊Statistics" Command="{Binding ShowStatisticsCommand}" Margin="0 5"/>
+                <ComboBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" Margin="0 5 0 10" FontFamily="Segoe Script"  IsEnabled="{Binding IsGameInactive}" />
+                <Button Content="🎮New Game" Command="{Binding NewGameCommand}" Margin="0 10"/>
+                <Button Content="📂Open Game" Command="{Binding OpenGameCommand}" Margin="0 10"/>
+                <Button Content="💾 Save Game" Command="{Binding SaveGameCommand}" Margin="0 10"/>
+                <Button Content="📊Statistics" Command="{Binding ShowStatisticsCommand}" Margin="0 10"/>
                 <Button Content="🚪Exit" Command="{Binding ExitCommand}" Margin="0 20 0 10" Background="DarkRed" Foreground="White"/>
 
                 <TextBlock Text="Options" FontFamily="Segoe Script" Foreground="White" FontWeight="Bold" />

@@ -9,7 +9,19 @@ namespace MemoryGame.Models
 {
     public class User
     {
-        public required string Name { get; set; }
-        public required string ImagePath { get; set; }
+        public string? Name { get; set; }
+        public string? ImagePath { get; set; }
+        public int GamesWon { get; set; }
+        public int GamesLost { get; set; }
+        public List<GameStatistic> GameHistory { get; set; } = new List<GameStatistic>();
+    }
+
+    public class GameStatistic
+    {
+        public int Rows { get; set; }
+        public int Columns { get; set; }
+        public string? Category { get; set; }
+        public int TimeRemain { get; set; } 
+        public bool IsWon { get; set; }
     }
 }

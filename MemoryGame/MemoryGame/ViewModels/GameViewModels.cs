@@ -9,6 +9,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using Application = System.Windows.Application;
 using System.Windows.Threading;
+using MemoryGame.Models;
+using System.Text.Json;
+using System.IO;
+using System.Text;
 #pragma warning disable CS8622
 #pragma warning disable CS8618
 
@@ -89,9 +93,6 @@ namespace MemoryGame.ViewModels
                 if (_selectedRows != value)
                 {
                     _selectedRows = value;
-                    //OnPropertyChanged(nameof(SelectedRows)); 
-                    //if(_selectedRows != 0)
-                      // GenerateGameBoard(); 
                     if (_selectedColumns != 0 && _selectedRows != 0)
                         WelcomeTextVisibility = false;
                 }
@@ -107,9 +108,6 @@ namespace MemoryGame.ViewModels
                 if (_selectedColumns != value)
                 {
                     _selectedColumns = value;
-                    //OnPropertyChanged(nameof(SelectedColumns)); 
-                    //if(_selectedColumns != 0)
-                        //GenerateGameBoard(); 
                     if(_selectedColumns != 0&&_selectedRows!=0)
                         WelcomeTextVisibility = false;
                 }
@@ -168,11 +166,23 @@ namespace MemoryGame.ViewModels
             }
         }
 
-
         public bool IsTimerRunning { get; private set; } = false; 
 
         public ICommand StartTimerCommand { get; private set; }
 
+        private User? _selectedUser;
+        public User? SelectedUser
+        {
+            get => _selectedUser;
+            set
+            {
+                if (_selectedUser != value)
+                {
+                    _selectedUser = value;
+                    OnPropertyChanged(nameof(SelectedUser));
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -212,6 +222,7 @@ namespace MemoryGame.ViewModels
 
             StartTimerCommand = new RelayCommand(StartTimer);
         }
+
         private void StartTimer(object? obj)
         {
             if (SelectedColumns == 4 && SelectedRows == 4)
@@ -246,21 +257,109 @@ namespace MemoryGame.ViewModels
 
             if (_elapsedTime == 0)  
             {
-                StopTimer();
-                _gameTimer.Stop();  
-                IsTimerRunning = false;  
-                OnPropertyChanged(nameof(IsTimerRunning));
-                IsGameInactive = true;
-                foreach (var card in GameCards.ToList())
-                {
-                    GameCards.Remove(card);
-                }
-                MessageBox.Show("You ran out of time!");  
+                SaveGameStatistics(false);
+                ResetGame();
+                MessageBox.Show($"{SelectedUser?.Name} ran out of time!");  
             }
         }
+        private void SaveGameStatistics(bool isWon)
+        {
+            if (SelectedUser != null)
+            {
+                var gameStatistic = new GameStatistic
+                {
+                    Rows = SelectedRows,
+                    Columns = SelectedColumns,
+                    Category = SelectedCategory,
+                    TimeRemain = ElapsedTime,
+                    IsWon = isWon
+                };
+
+                SelectedUser.GameHistory.Add(gameStatistic);
+
+                if (isWon)
+                {
+                    SelectedUser.GamesWon++;
+                }
+                else
+                {
+                    SelectedUser.GamesLost++;
+                }
+
+                SaveUserStatistics(SelectedUser);
+            }
+        }
+
+        private void SaveUserStatistics(User user)
+        {
+            List<User> users = LoadUsersFromFile();
+
+            var existingUser = users.FirstOrDefault(u => u.Name == user.Name);
+
+            if (existingUser != null)
+            {
+                existingUser.GamesWon = user.GamesWon;
+                existingUser.GamesLost = user.GamesLost;
+                existingUser.GameHistory = user.GameHistory;
+            }
+
+            SaveUsersToFile(users);
+        }
+
+        private List<User> LoadUsersFromFile()
+        {
+            if (File.Exists("../../../Data/users.json"))
+            {
+                try
+                {
+                    string json = File.ReadAllText("../../../Data/users.json");
+
+                    if (string.IsNullOrEmpty(json))
+                    {
+                        return new List<User>();
+                    }
+
+                    var users = JsonSerializer.Deserialize<List<User>>(json);
+
+                    if (users == null)
+                    {
+                        MessageBox.Show("Failed to deserialize users.");
+                        return new List<User>();
+                    }
+
+                    return users;
+                }
+                catch (JsonException ex)
+                {
+                    MessageBox.Show($"Error deserializing JSON: {ex.Message}");
+                    return new List<User>();
+                }
+            }
+            else
+            {
+                return new List<User>();
+            }
+        }
+
+        private void SaveUsersToFile(List<User> users)
+        {
+            string json = JsonSerializer.Serialize(users, new JsonSerializerOptions { WriteIndented = true });
+            //MessageBox.Show($"Serialized JSON: {json}");
+            try
+            {
+                File.WriteAllText("../../../Data/users.json", json);
+                //MessageBox.Show("Users data saved successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving users data: {ex.Message}");
+            }
+        }
+
         private void StopTimer()
         {
             _gameTimer.Stop();
+            ElapsedTime = 0;
             IsTimerRunning = false;
         }
 
@@ -287,6 +386,30 @@ namespace MemoryGame.ViewModels
                 StartTimer(null);
             }
         }
+        private void ResetGame()
+        {
+            StopTimer();
+            _gameTimer.Stop();
+            IsTimerRunning = false;
+            OnPropertyChanged(nameof(IsTimerRunning));
+            IsGameInactive = true;
+            foreach (var card in GameCards.ToList())
+            {
+                GameCards.Remove(card);
+            }
+        }
+
+        private void CheckForWin()
+        {
+            bool allMatched = GameCards.All(card => !card.IsEnabled);
+
+            if (allMatched)
+            {
+                SaveGameStatistics(true);
+                ResetGame();
+                MessageBox.Show($"Congratulations {SelectedUser?.Name}! You won the game!");
+            }
+        }
 
         private void OpenGame(object obj)
         {
@@ -301,7 +424,8 @@ namespace MemoryGame.ViewModels
 
         private void ShowStatistics(object obj)
         {
-            MessageBox.Show("Showing game statistics...");
+            StatisticsWindow statistics = new StatisticsWindow();
+            statistics.Show();
         }
 
         private void Exit(object obj)
@@ -335,12 +459,12 @@ namespace MemoryGame.ViewModels
             {
                 GameCards = new ObservableCollection<Button>();
 
-                double windowWidth = Application.Current.MainWindow.ActualWidth;
+                double windowWidth = Application.Current.MainWindow.ActualWidth-200;
                 double windowHeight = Application.Current.MainWindow.ActualHeight-50;
 
                 //MessageBox.Show($"{windowWidth}, {windowHeight}");
-                ButtonWidth = windowWidth / SelectedColumns-15*SelectedColumns;
-                ButtonHeight = windowHeight / SelectedRows-10*SelectedRows;
+                ButtonWidth = windowWidth / SelectedColumns-5*SelectedColumns;
+                ButtonHeight = windowHeight / SelectedRows-5*SelectedRows;
 
                 List<string> imagePaths = new List<string>();
 
@@ -468,6 +592,7 @@ namespace MemoryGame.ViewModels
                                     firstCard = null;
                                     secondCard = null;
                                 }
+                                CheckForWin();
                                 isChecking = false;
                             });
                         });
