@@ -131,7 +131,6 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <!-- Butonul cu semnul de întrebare -->
                                 <Button BorderBrush="Black" Width="200" Height="200"
                                         Command="{Binding DataContext.CardClicked, RelativeSource={RelativeSource AncestorType=Window}}">
                                     <TextBlock Text="?" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="White"/>

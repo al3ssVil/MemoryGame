@@ -10,8 +10,48 @@
 
   <ItemGroup>
     <None Remove="Images\AboutBackground.jpg" />
+    <None Remove="Images\Animals\Animal1.jpg" />
+    <None Remove="Images\Animals\Animal10.jpg" />
+    <None Remove="Images\Animals\Animal11.jpg" />
+    <None Remove="Images\Animals\Animal12.jpg" />
+    <None Remove="Images\Animals\Animal13.jpg" />
+    <None Remove="Images\Animals\Animal14.jpg" />
+    <None Remove="Images\Animals\Animal15.jpg" />
+    <None Remove="Images\Animals\Animal16.jpg" />
+    <None Remove="Images\Animals\Animal17.jpg" />
+    <None Remove="Images\Animals\Animal18.jpg" />
+    <None Remove="Images\Animals\Animal19.jpg" />
+    <None Remove="Images\Animals\Animal2.jpg" />
+    <None Remove="Images\Animals\Animal20.jpg" />
+    <None Remove="Images\Animals\Animal3.jpg" />
+    <None Remove="Images\Animals\Animal4.jpg" />
+    <None Remove="Images\Animals\Animal5.jpg" />
+    <None Remove="Images\Animals\Animal6.jpg" />
+    <None Remove="Images\Animals\Animal7.jpg" />
+    <None Remove="Images\Animals\Animal8.jpg" />
+    <None Remove="Images\Animals\Animal9.jpg" />
     <None Remove="Images\background.jpg" />
     <None Remove="Images\BackgroundGame.jpg" />
+    <None Remove="Images\Flowers\Flower1.jpg" />
+    <None Remove="Images\Flowers\Flower10.jpg" />
+    <None Remove="Images\Flowers\Flower11.jpg" />
+    <None Remove="Images\Flowers\Flower12.jpg" />
+    <None Remove="Images\Flowers\Flower13.jpg" />
+    <None Remove="Images\Flowers\Flower14.jpg" />
+    <None Remove="Images\Flowers\Flower15.jpg" />
+    <None Remove="Images\Flowers\Flower16.jpg" />
+    <None Remove="Images\Flowers\Flower17.jpg" />
+    <None Remove="Images\Flowers\Flower18.jpg" />
+    <None Remove="Images\Flowers\Flower19.jpg" />
+    <None Remove="Images\Flowers\Flower2.jpg" />
+    <None Remove="Images\Flowers\Flower20.jpg" />
+    <None Remove="Images\Flowers\Flower3.jpg" />
+    <None Remove="Images\Flowers\Flower4.jpg" />
+    <None Remove="Images\Flowers\Flower5.jpg" />
+    <None Remove="Images\Flowers\Flower6.jpg" />
+    <None Remove="Images\Flowers\Flower7.jpg" />
+    <None Remove="Images\Flowers\Flower8.jpg" />
+    <None Remove="Images\Flowers\Flower9.jpg" />
     <None Remove="Images\Image1.jpg" />
     <None Remove="Images\Image10.jpg" />
     <None Remove="Images\Image11.jpg" />
@@ -32,7 +72,227 @@
     <None Remove="Images\Image7.jpg" />
     <None Remove="Images\Image8.jpg" />
     <None Remove="Images\Image9.jpg" />
+    <None Remove="Images\Nature\Nature1.jpg" />
+    <None Remove="Images\Nature\Nature10.jpg" />
+    <None Remove="Images\Nature\Nature11.jpg" />
+    <None Remove="Images\Nature\Nature12.jpg" />
+    <None Remove="Images\Nature\Nature13.jpg" />
+    <None Remove="Images\Nature\Nature14.jpg" />
+    <None Remove="Images\Nature\Nature15.jpg" />
+    <None Remove="Images\Nature\Nature16.jpg" />
+    <None Remove="Images\Nature\Nature17.jpg" />
+    <None Remove="Images\Nature\Nature18.jpg" />
+    <None Remove="Images\Nature\Nature19.jpg" />
+    <None Remove="Images\Nature\Nature2.jpg" />
+    <None Remove="Images\Nature\Nature20.jpg" />
+    <None Remove="Images\Nature\Nature3.jpg" />
+    <None Remove="Images\Nature\Nature4.jpg" />
+    <None Remove="Images\Nature\Nature5.jpg" />
+    <None Remove="Images\Nature\Nature6.jpg" />
+    <None Remove="Images\Nature\Nature7.jpg" />
+    <None Remove="Images\Nature\Nature8.jpg" />
+    <None Remove="Images\Nature\Nature9.jpg" />
     <None Remove="Images\StatisticsBackground.jpg" />
+    <None Remove="Images\Users\Image1.jpg" />
+    <None Remove="Images\Users\Image10.jpg" />
+    <None Remove="Images\Users\Image11.jpg" />
+    <None Remove="Images\Users\Image12.jpg" />
+    <None Remove="Images\Users\Image13.jpg" />
+    <None Remove="Images\Users\Image14.jpg" />
+    <None Remove="Images\Users\Image15.jpg" />
+    <None Remove="Images\Users\Image16.jpg" />
+    <None Remove="Images\Users\Image17.jpg" />
+    <None Remove="Images\Users\Image18.jpg" />
+    <None Remove="Images\Users\Image19.jpg" />
+    <None Remove="Images\Users\Image2.jpg" />
+    <None Remove="Images\Users\Image20.jpg" />
+    <None Remove="Images\Users\Image3.jpg" />
+    <None Remove="Images\Users\Image4.jpg" />
+    <None Remove="Images\Users\Image5.jpg" />
+    <None Remove="Images\Users\Image6.jpg" />
+    <None Remove="Images\Users\Image7.jpg" />
+    <None Remove="Images\Users\Image8.jpg" />
+    <None Remove="Images\Users\Image9.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Animals\Animal1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal10.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal11.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal12.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal13.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal14.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal15.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal16.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal17.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal19.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal20.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Animals\Animal9.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower10.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower11.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower12.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower13.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower14.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower15.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower16.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower17.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower18.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower19.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower20.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Flowers\Flower9.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature10.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature11.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature12.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature13.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature14.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature15.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature16.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature17.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature19.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature20.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Nature\Nature9.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image4.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -46,76 +306,73 @@
     <Resource Include="Images\BackgroundGame.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Image20.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Images\background.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\Image1.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image10.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image11.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image12.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image13.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image14.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image15.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image16.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image17.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image18.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image19.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image2.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image3.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image4.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image5.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image6.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image7.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image8.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\Image9.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Images\SidebarBackground.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\StatisticsBackground.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image10.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image11.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image12.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image13.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image14.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image15.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image16.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image17.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image18.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image19.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image20.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image3.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image5.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image6.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image7.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image8.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Users\Image9.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

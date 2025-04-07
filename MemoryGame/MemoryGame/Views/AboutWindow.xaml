@@ -34,9 +34,10 @@
                        HorizontalAlignment="Left" Width="69"/>
 
             <TextBlock HorizontalAlignment="Center" FontFamily="Segoe Script" FontSize="14" >
-                <Hyperlink NavigateUri="mailto:alessandra.vilcu@student.unitbv.ro">
-                    <Run Text="alessandra.vilcu@student.unitbv.ro"/>
-                </Hyperlink>
+                 <Hyperlink NavigateUri="mailto:alessandra.vilcu@student.unitbv.ro"
+                            RequestNavigate="Hyperlink_RequestNavigate">
+                       <Run Text="alessandra.vilcu@student.unitbv.ro"/>
+                 </Hyperlink>
             </TextBlock>
 
             <TextBlock Text="Group:"

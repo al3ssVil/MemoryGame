@@ -1,43 +1,43 @@
 [
   {
     "Name": "andrei",
-    "ImagePath": "../Images/Image14.jpg",
+    "ImagePath": "../Images/Users/Image14.jpg",
     "GamesWon": 0,
     "GamesLost": 0,
     "GameHistory": []
   },
   {
     "Name": "nicol",
-    "ImagePath": "../Images/Image11.jpg",
+    "ImagePath": "../Images/Users/Image11.jpg",
     "GamesWon": 0,
     "GamesLost": 0,
     "GameHistory": []
   },
   {
     "Name": "iulia",
-    "ImagePath": "../Images/Image17.jpg",
+    "ImagePath": "../Images/Users/Image17.jpg",
     "GamesWon": 0,
     "GamesLost": 0,
     "GameHistory": []
   },
   {
     "Name": "al3ss",
-    "ImagePath": "../Images/Image18.jpg",
+    "ImagePath": "../Images/Users/Image18.jpg",
     "GamesWon": 0,
     "GamesLost": 0,
     "GameHistory": []
   },
   {
     "Name": "mihai",
-    "ImagePath": "../Images/Image19.jpg",
+    "ImagePath": "../Images/Users/Image19.jpg",
     "GamesWon": 0,
     "GamesLost": 0,
     "GameHistory": []
   },
   {
     "Name": "12345",
-    "ImagePath": "../Images/Image20.jpg",
-    "GamesWon": 2,
+    "ImagePath": "../Images/Users/Image20.jpg",
+    "GamesWon": 3,
     "GamesLost": 2,
     "GameHistory": [
       {
@@ -67,14 +67,21 @@
         "Category": "Animals",
         "TimeRemain": 0,
         "IsWon": false
+      },
+      {
+        "Rows": 4,
+        "Columns": 4,
+        "Category": "Animals",
+        "TimeRemain": 16,
+        "IsWon": true
       }
     ]
   },
   {
     "Name": "98765",
-    "ImagePath": "../Images/Image15.jpg",
-    "GamesWon": 2,
-    "GamesLost": 4,
+    "ImagePath": "../Images/Users/Image15.jpg",
+    "GamesWon": 3,
+    "GamesLost": 5,
     "GameHistory": [
       {
         "Rows": 4,
@@ -117,14 +124,50 @@
         "Category": "Animals",
         "TimeRemain": 0,
         "IsWon": false
+      },
+      {
+        "Rows": 2,
+        "Columns": 3,
+        "Category": "Animals",
+        "TimeRemain": 0,
+        "IsWon": false
+      },
+      {
+        "Rows": 4,
+        "Columns": 4,
+        "Category": "Animals",
+        "TimeRemain": 27,
+        "IsWon": true
       }
     ]
   },
   {
     "Name": "qwerty",
-    "ImagePath": "../Images/Image1.jpg",
-    "GamesWon": 0,
+    "ImagePath": "../Images/Users/Image13.jpg",
+    "GamesWon": 3,
     "GamesLost": 0,
-    "GameHistory": []
+    "GameHistory": [
+      {
+        "Rows": 3,
+        "Columns": 2,
+        "Category": "Animals",
+        "TimeRemain": 52,
+        "IsWon": true
+      },
+      {
+        "Rows": 3,
+        "Columns": 2,
+        "Category": "Flowers",
+        "TimeRemain": 50,
+        "IsWon": true
+      },
+      {
+        "Rows": 3,
+        "Columns": 2,
+        "Category": "Flowers",
+        "TimeRemain": 47,
+        "IsWon": true
+      }
+    ]
   }
 ]

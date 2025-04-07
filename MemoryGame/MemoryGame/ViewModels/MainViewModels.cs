@@ -60,26 +60,26 @@ namespace MemoryGame.ViewModels
  
         private List<string> availableImages = new List<string>
         {
-            "../Images/Image1.jpg",
-            "../Images/Image2.jpg",
-            "../Images/Image3.jpg",
-            "../Images/Image4.jpg",
-            "../Images/Image5.jpg",
-            "../Images/Image6.jpg",
-            "../Images/Image7.jpg",
-            "../Images/Image8.jpg",
-            "../Images/Image9.jpg",
-            "../Images/Image10.jpg",
-            "../Images/Image11.jpg",
-            "../Images/Image12.jpg",
-            "../Images/Image13.jpg",
-            "../Images/Image14.jpg",
-            "../Images/Image15.jpg",
-            "../Images/Image16.jpg",
-            "../Images/Image17.jpg",
-            "../Images/Image18.jpg",
-            "../Images/Image19.jpg",
-            "../Images/Image20.jpg"
+            "../Images/Users/Image1.jpg",
+            "../Images/Users/Image2.jpg",
+            "../Images/Users/Image3.jpg",
+            "../Images/Users/Image4.jpg",
+            "../Images/Users/Image5.jpg",
+            "../Images/Users/Image6.jpg",
+            "../Images/Users/Image7.jpg",
+            "../Images/Users/Image8.jpg",
+            "../Images/Users/Image9.jpg",
+            "../Images/Users/Image10.jpg",
+            "../Images/Users/Image11.jpg",
+            "../Images/Users/Image12.jpg",
+            "../Images/Users/Image13.jpg",
+            "../Images/Users/Image14.jpg",
+            "../Images/Users/Image15.jpg",
+            "../Images/Users/Image16.jpg",
+            "../Images/Users/Image17.jpg",
+            "../Images/Users/Image18.jpg",
+            "../Images/Users/Image19.jpg",
+            "../Images/Users/Image20.jpg"
         };
 
         public string? SelectedImage
@@ -212,7 +212,7 @@ namespace MemoryGame.ViewModels
         {
             var options = new JsonSerializerOptions
             {
-                WriteIndented = true // Salvează JSON-ul frumos
+                WriteIndented = true 
             };
             var json = System.Text.Json.JsonSerializer.Serialize(Users, options);
             File.WriteAllText("../../../Data/users.json", json);

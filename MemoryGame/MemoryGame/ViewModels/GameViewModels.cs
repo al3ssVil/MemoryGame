@@ -20,6 +20,7 @@ namespace MemoryGame.ViewModels
 {
     class GameViewModel : INotifyPropertyChanged
     {
+        #region IComand
         public ICommand SelectCategoryCommand { get; private set; }
         public ICommand NewGameCommand { get; private set; }
         public ICommand OpenGameCommand { get; private set; }
@@ -29,40 +30,88 @@ namespace MemoryGame.ViewModels
         public ICommand SetStandardBoardSizeCommand { get; private set; }
         public ICommand SetCustomBoardSizeCommand { get; private set; }
         public ICommand ShowAboutCommand { get; private set; }
-        public ICommand CardClickedCommand { get; private set; } 
+        public ICommand CardClickedCommand { get; private set; }
+        public ICommand StartTimerCommand { get; private set; }
 
+        #endregion  
 
+        #region  Game State and Configuration
         public ObservableCollection<string> Categories { get; set; }=new ObservableCollection<string>();
         public string SelectedCategory { get; set; }
 
         List<string> imageAnimals = new List<string> 
         { 
-            "../../../Images/Image1.jpg",
-            "../../../Images/Image2.jpg",
-            "../../../Images/Image3.jpg",
-            "../../../Images/Image4.jpg",
-            "../../../Images/Image5.jpg",
-            "../../../Images/Image6.jpg",
-            "../../../Images/Image7.jpg",
-            "../../../Images/Image8.jpg",
-            "../../../Images/Image9.jpg",
-            "../../../Images/Image10.jpg",
-            "../../../Images/Image11.jpg",
-            "../../../Images/Image12.jpg",
-            "../../../Images/Image13.jpg",
-            "../../../Images/Image14.jpg",
-            "../../../Images/Image15.jpg",
-            "../../../Images/Image16.jpg",
-            "../../../Images/Image17.jpg",
-            "../../../Images/Image18.jpg",
-            "../../../Images/Image19.jpg",
-            "../../../Images/Image20.jpg"
+            "../../../Images/Animals/Animal1.jpg",
+            "../../../Images/Animals/Animal2.jpg",
+            "../../../Images/Animals/Animal3.jpg",
+            "../../../Images/Animals/Animal4.jpg",
+            "../../../Images/Animals/Animal5.jpg",
+            "../../../Images/Animals/Animal6.jpg",
+            "../../../Images/Animals/Animal7.jpg",
+            "../../../Images/Animals/Animal8.jpg",
+            "../../../Images/Animals/Animal9.jpg",
+            "../../../Images/Animals/Animal10.jpg",
+            "../../../Images/Animals/Animal11.jpg",
+            "../../../Images/Animals/Animal12.jpg",
+            "../../../Images/Animals/Animal13.jpg",
+            "../../../Images/Animals/Animal14.jpg",
+            "../../../Images/Animals/Animal15.jpg",
+            "../../../Images/Animals/Animal16.jpg",
+            "../../../Images/Animals/Animal17.jpg",
+            "../../../Images/Animals/Animal18.jpg",
+            "../../../Images/Animals/Animal19.jpg",
+            "../../../Images/Animals/Animal20.jpg"
         };
-        List<string> imageNature = new List<string> { };
-        List<string> imageFlowers = new List<string> { };
+        List<string> imageNature = new List<string> 
+        {
+            "../../../Images/Nature/Nature1.jpg",
+            "../../../Images/Nature/Nature2.jpg",
+            "../../../Images/Nature/Nature3.jpg",
+            "../../../Images/Nature/Nature4.jpg",
+            "../../../Images/Nature/Nature5.jpg",
+            "../../../Images/Nature/Nature6.jpg",
+            "../../../Images/Nature/Nature7.jpg",
+            "../../../Images/Nature/Nature8.jpg",
+            "../../../Images/Nature/Nature9.jpg",
+            "../../../Images/Nature/Nature10.jpg",
+            "../../../Images/Nature/Nature11.jpg",
+            "../../../Images/Nature/Nature12.jpg",
+            "../../../Images/Nature/Nature13.jpg",
+            "../../../Images/Nature/Nature14.jpg",
+            "../../../Images/Nature/Nature15.jpg",
+            "../../../Images/Nature/Nature16.jpg",
+            "../../../Images/Nature/Nature17.jpg",
+            "../../../Images/Nature/Nature18.jpg",
+            "../../../Images/Nature/Nature19.jpg",
+            "../../../Images/Nature/Nature20.jpg"
+        };
+        List<string> imageFlowers = new List<string> 
+        {
+            "../../../Images/Flowers/Flower1.jpg",
+            "../../../Images/Flowers/Flower2.jpg",
+            "../../../Images/Flowers/Flower3.jpg",
+            "../../../Images/Flowers/Flower4.jpg",
+            "../../../Images/Flowers/Flower5.jpg",
+            "../../../Images/Flowers/Flower6.jpg",
+            "../../../Images/Flowers/Flower7.jpg",
+            "../../../Images/Flowers/Flower8.jpg",
+            "../../../Images/Flowers/Flower9.jpg",
+            "../../../Images/Flowers/Flower10.jpg",
+            "../../../Images/Flowers/Flower11.jpg",
+            "../../../Images/Flowers/Flower12.jpg",
+            "../../../Images/Flowers/Flower13.jpg",
+            "../../../Images/Flowers/Flower14.jpg",
+            "../../../Images/Flowers/Flower15.jpg",
+            "../../../Images/Flowers/Flower16.jpg",
+            "../../../Images/Flowers/Flower17.jpg",
+            "../../../Images/Flowers/Flower18.jpg",
+            "../../../Images/Flowers/Flower19.jpg",
+            "../../../Images/Flowers/Flower20.jpg"
+        };
 
 
         public ObservableCollection<Button> GameCards { get; set; }
+        public bool isContinued = false;
 
         private Button? firstCard = null;
         private Button? secondCard = null;
@@ -167,8 +216,6 @@ namespace MemoryGame.ViewModels
 
         public bool IsTimerRunning { get; private set; } = false; 
 
-        public ICommand StartTimerCommand { get; private set; }
-
         private User? _selectedUser;
         public User? SelectedUser
         {
@@ -182,6 +229,8 @@ namespace MemoryGame.ViewModels
                 }
             }
         }
+        #endregion
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -250,7 +299,7 @@ namespace MemoryGame.ViewModels
             if (_elapsedTime > 0)
             {
                 _elapsedTime--;
-                ElapsedTime = _elapsedTime;  // Acesta va actualiza binding-ul pe UI
+                ElapsedTime = _elapsedTime;  // Update UI
                 OnPropertyChanged(nameof(ElapsedTime));
             }
 
@@ -258,9 +307,23 @@ namespace MemoryGame.ViewModels
             {
                 SaveGameStatistics(false);
                 ResetGame();
-                MessageBox.Show($"{SelectedUser?.Name} ran out of time!");  
+                MessageBox.Show($"{SelectedUser?.Name} ran out of time!");
+                if (isContinued)
+                {
+                    if (File.Exists("../../../Data/saved_game.json"))
+                    {
+                        string json = File.ReadAllText("../../../Data/saved_game.json");
+                        var allGames = JsonSerializer.Deserialize<List<SavedGame>>(json);
+
+                        allGames?.RemoveAll(g => g.PlayerName == SelectedUser?.Name);
+
+                        string updatedJson = JsonSerializer.Serialize(allGames, new JsonSerializerOptions { WriteIndented = true });
+                        File.WriteAllText("../../../Data/saved_game.json", updatedJson);
+                    }
+                }
             }
         }
+
         private void SaveGameStatistics(bool isWon)
         {
             if (SelectedUser != null)
@@ -376,6 +439,7 @@ namespace MemoryGame.ViewModels
             }
             if (SelectedColumns != 0 && SelectedRows != 0)
             {
+                isContinued = false;
                 IsGameInactive = false;
                 WelcomeTextVisibility = false;
                 //MessageBox.Show($"Starting a new game with category: {SelectedCategory} and size: {SelectedRows}x{SelectedColumns}");
@@ -385,6 +449,7 @@ namespace MemoryGame.ViewModels
                 StartTimer(null);
             }
         }
+        
         private void ResetGame()
         {
             StopTimer();
@@ -401,7 +466,9 @@ namespace MemoryGame.ViewModels
         private void CheckForWin()
         {
             if(GameCards.Count == 0)
-                { return; }
+            {
+                return;
+            }
             bool allMatched = GameCards.All(card => !card.IsEnabled);
 
             if (allMatched)
@@ -409,6 +476,19 @@ namespace MemoryGame.ViewModels
                 SaveGameStatistics(true);
                 ResetGame();
                 MessageBox.Show($"Congratulations {SelectedUser?.Name}! You won the game!");
+                if(isContinued)
+                {
+                    if (File.Exists("../../../Data/saved_game.json"))
+                    {
+                        string json = File.ReadAllText("../../../Data/saved_game.json");
+                        var allGames = JsonSerializer.Deserialize<List<SavedGame>>(json);
+
+                        allGames?.RemoveAll(g => g.PlayerName == SelectedUser?.Name);
+
+                        string updatedJson = JsonSerializer.Serialize(allGames, new JsonSerializerOptions { WriteIndented = true });
+                        File.WriteAllText("../../../Data/saved_game.json", updatedJson);
+                    }
+                }
             }
         }
 
@@ -426,6 +506,7 @@ namespace MemoryGame.ViewModels
 
                     if (savedGame != null)
                     {
+                        isContinued= true;
                         IsGameInactive = false;
                         _elapsedTime = savedGame.TimeRemaining;
                         SelectedRows = savedGame.Rows;
@@ -453,8 +534,7 @@ namespace MemoryGame.ViewModels
                                 Command = CardClickedCommand,
                                 CommandParameter = null,
                             };
-
-                            if (cardState.IsFlipped)
+                            if (cardState.IsFlipped&& cardState.ImagePath != null)
                             {
                                 cardButton.Background = new ImageBrush
                                 {
@@ -481,7 +561,7 @@ namespace MemoryGame.ViewModels
                         OnPropertyChanged(nameof(IsTimerRunning));
                         OnPropertyChanged(nameof(ElapsedTime));
 
-                        MessageBox.Show("Game loaded successfully.");
+                        //MessageBox.Show("Game loaded successfully.");
                     }
                     else
                     {
@@ -550,7 +630,7 @@ namespace MemoryGame.ViewModels
 
                 ResetGame();
 
-                MessageBox.Show("Game saved.");
+                //MessageBox.Show("Game saved.");
             }
             catch (Exception ex)
             {
@@ -567,6 +647,8 @@ namespace MemoryGame.ViewModels
         private void Exit(object obj)
         {
             MessageBox.Show("Exiting the game...");
+            if(GameCards!=null) 
+                SaveGame(GameCards);
             Application.Current.Shutdown();
         }
 
