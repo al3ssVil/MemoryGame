@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MemoryGame.Models
+namespace MemoryGame.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -19,11 +19,6 @@ namespace MemoryGame.Models
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
-            throw new NotImplementedException();
         }
     }
 }

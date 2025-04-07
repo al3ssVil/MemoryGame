@@ -13,6 +13,7 @@ using MemoryGame.Models;
 using System.Text.Json;
 using System.IO;
 using System.Text;
+using MainWindow = MemoryGame.Views.MainWindow;
 #pragma warning disable CS8622
 #pragma warning disable CS8618
 
@@ -649,7 +650,15 @@ namespace MemoryGame.ViewModels
             MessageBox.Show("Exiting the game...");
             if(GameCards!=null) 
                 SaveGame(GameCards);
-            Application.Current.Shutdown();
+            Window? currentWindow = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive);
+
+            if (currentWindow != null)
+            {
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+
+                currentWindow.Close();
+            }
         }
 
         private void SetStandardBoardSize(object obj)
