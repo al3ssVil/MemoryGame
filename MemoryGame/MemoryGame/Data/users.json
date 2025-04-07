@@ -35,39 +35,96 @@
     "GameHistory": []
   },
   {
-    "Name": "123456",
-    "ImagePath": "../Images/Image6.jpg",
-    "GamesWon": 4,
-    "GamesLost": 0,
+    "Name": "12345",
+    "ImagePath": "../Images/Image20.jpg",
+    "GamesWon": 2,
+    "GamesLost": 2,
     "GameHistory": [
       {
-        "Rows": 2,
-        "Columns": 2,
+        "Rows": 4,
+        "Columns": 5,
         "Category": "Animals",
-        "TimeRemain": 5,
+        "TimeRemain": 0,
         "IsWon": true
       },
       {
-        "Rows": 2,
-        "Columns": 3,
+        "Rows": 4,
+        "Columns": 5,
         "Category": "Animals",
-        "TimeRemain": 43,
+        "TimeRemain": 0,
+        "IsWon": false
+      },
+      {
+        "Rows": 4,
+        "Columns": 5,
+        "Category": "Animals",
+        "TimeRemain": 0,
         "IsWon": true
       },
       {
-        "Rows": 2,
-        "Columns": 3,
+        "Rows": 4,
+        "Columns": 5,
         "Category": "Animals",
-        "TimeRemain": 38,
-        "IsWon": true
-      },
-      {
-        "Rows": 2,
-        "Columns": 3,
-        "Category": "Animals",
-        "TimeRemain": 43,
-        "IsWon": true
+        "TimeRemain": 0,
+        "IsWon": false
       }
     ]
+  },
+  {
+    "Name": "98765",
+    "ImagePath": "../Images/Image15.jpg",
+    "GamesWon": 2,
+    "GamesLost": 4,
+    "GameHistory": [
+      {
+        "Rows": 4,
+        "Columns": 4,
+        "Category": "Animals",
+        "TimeRemain": 0,
+        "IsWon": false
+      },
+      {
+        "Rows": 2,
+        "Columns": 3,
+        "Category": "Animals",
+        "TimeRemain": 53,
+        "IsWon": true
+      },
+      {
+        "Rows": 2,
+        "Columns": 3,
+        "Category": "Animals",
+        "TimeRemain": 51,
+        "IsWon": true
+      },
+      {
+        "Rows": 2,
+        "Columns": 3,
+        "Category": "Animals",
+        "TimeRemain": 0,
+        "IsWon": false
+      },
+      {
+        "Rows": 2,
+        "Columns": 3,
+        "Category": "Animals",
+        "TimeRemain": 0,
+        "IsWon": false
+      },
+      {
+        "Rows": 2,
+        "Columns": 3,
+        "Category": "Animals",
+        "TimeRemain": 0,
+        "IsWon": false
+      }
+    ]
+  },
+  {
+    "Name": "qwerty",
+    "ImagePath": "../Images/Image1.jpg",
+    "GamesWon": 0,
+    "GamesLost": 0,
+    "GameHistory": []
   }
 ]

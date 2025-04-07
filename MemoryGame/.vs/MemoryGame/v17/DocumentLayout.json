@@ -11,8 +11,8 @@
       "RelativeMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|solutionrelative:memorygame\\data\\saved_game.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|c:\\users\\vilcu\\desktop\\projects\\memorygame\\memorygame\\memorygame\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|solutionrelative:memorygame\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|c:\\users\\vilcu\\desktop\\projects\\memorygame\\memorygame\\memorygame\\data\\users.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{221E61D6-F5D8-404A-B6B8-9B1341C8F940}|MemoryGame\\MemoryGame.csproj|solutionrelative:memorygame\\data\\users.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,14 +27,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\Models\\User.cs",
-              "RelativeDocumentMoniker": "MemoryGame\\Models\\User.cs",
-              "ToolTip": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\Models\\User.cs",
-              "RelativeToolTip": "MemoryGame\\Models\\User.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAA/wCgAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-06T19:54:43.486Z",
+              "Title": "users.json",
+              "DocumentMoniker": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\Data\\users.json",
+              "RelativeDocumentMoniker": "MemoryGame\\Data\\users.json",
+              "ToolTip": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\Data\\users.json",
+              "RelativeToolTip": "MemoryGame\\Data\\users.json",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAAAD0AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-07T12:05:20.266Z",
               "EditorCaption": ""
             },
             {
@@ -45,7 +45,7 @@
               "RelativeDocumentMoniker": "MemoryGame\\Data\\saved_game.json",
               "ToolTip": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\Data\\saved_game.json",
               "RelativeToolTip": "MemoryGame\\Data\\saved_game.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-04-06T20:03:55.66Z",
               "EditorCaption": ""
@@ -58,7 +58,7 @@
               "RelativeDocumentMoniker": "MemoryGame\\ViewModels\\GameViewModels.cs",
               "ToolTip": "C:\\Users\\vilcu\\Desktop\\projects\\MemoryGame\\MemoryGame\\MemoryGame\\ViewModels\\GameViewModels.cs",
               "RelativeToolTip": "MemoryGame\\ViewModels\\GameViewModels.cs",
-              "ViewState": "AgIAALICAAAAAAAAAAAqwMYCAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAMQCAAAAAAAAAAAYwNICAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-05T13:18:47.668Z",
               "EditorCaption": ""

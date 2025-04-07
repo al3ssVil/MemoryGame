@@ -32,7 +32,7 @@ namespace MemoryGame.ViewModels
         public ICommand CardClickedCommand { get; private set; } 
 
 
-        public ObservableCollection<string> Categories { get; set; }
+        public ObservableCollection<string> Categories { get; set; }=new ObservableCollection<string>();
         public string SelectedCategory { get; set; }
 
         List<string> imageAnimals = new List<string> 
@@ -400,6 +400,8 @@ namespace MemoryGame.ViewModels
 
         private void CheckForWin()
         {
+            if(GameCards.Count == 0)
+                { return; }
             bool allMatched = GameCards.All(card => !card.IsEnabled);
 
             if (allMatched)
@@ -418,72 +420,72 @@ namespace MemoryGame.ViewModels
                 if (File.Exists("../../../Data/saved_game.json"))
                 {
                     string json = File.ReadAllText("../../../Data/saved_game.json");
-                    var savedGame = JsonSerializer.Deserialize<SavedGame>(json);
+                    var allGames = JsonSerializer.Deserialize<List<SavedGame>>(json);
+
+                    var savedGame = allGames?.FirstOrDefault(g => g.PlayerName == SelectedUser?.Name);
 
                     if (savedGame != null)
                     {
-                        if (savedGame.PlayerName == SelectedUser.Name)
+                        IsGameInactive = false;
+                        _elapsedTime = savedGame.TimeRemaining;
+                        SelectedRows = savedGame.Rows;
+                        SelectedColumns = savedGame.Columns;
+
+                        GameCards = new ObservableCollection<Button>();
+
+                        double windowWidth = Application.Current.MainWindow.ActualWidth - 200;
+                        double windowHeight = Application.Current.MainWindow.ActualHeight - 50;
+
+                        ButtonWidth = windowWidth / SelectedColumns - 5 * SelectedColumns;
+                        ButtonHeight = windowHeight / SelectedRows - 5 * SelectedRows;
+
+                        foreach (var cardState in savedGame.CardStates)
                         {
-                            _elapsedTime = savedGame.TimeRemaining;
-                            SelectedRows = savedGame.Rows;
-                            SelectedColumns = savedGame.Columns;
-
-                            GameCards = new ObservableCollection<Button>();
-
-                            double windowWidth = Application.Current.MainWindow.ActualWidth - 200;
-                            double windowHeight = Application.Current.MainWindow.ActualHeight - 50;
-
-                            ButtonWidth = windowWidth / SelectedColumns - 5 * SelectedColumns;
-                            ButtonHeight = windowHeight / SelectedRows - 5 * SelectedRows;
-
-                            foreach (var cardState in savedGame.CardStates)
+                            var cardButton = new Button
                             {
-                                var cardButton = new Button
+                                Width = ButtonWidth,
+                                Height = ButtonHeight,
+                                Tag = cardState.Tag,
+                                Background = cardState.IsFlipped ? Brushes.Transparent : Brushes.Gray,
+                                Foreground = Brushes.White,
+                                FontSize = 24,
+                                FontWeight = FontWeights.Bold,
+                                Command = CardClickedCommand,
+                                CommandParameter = null,
+                            };
+
+                            if (cardState.IsFlipped)
+                            {
+                                cardButton.Background = new ImageBrush
                                 {
-                                    Width = ButtonWidth,
-                                    Height = ButtonHeight,
-                                    Tag = cardState.Tag,
-                                    Background = cardState.IsFlipped ? Brushes.Transparent : Brushes.Gray,
-                                    Foreground = Brushes.White,
-                                    FontSize = 24,
-                                    FontWeight = FontWeights.Bold,
-                                    Command = CardClickedCommand,
-                                    CommandParameter = null,
+                                    ImageSource = new BitmapImage(new Uri(cardState.ImagePath, UriKind.Relative)),
+                                    Stretch = Stretch.Uniform
                                 };
-
-                                if (cardState.IsFlipped)
-                                {
-                                    cardButton.Background = new ImageBrush
-                                    {
-                                        ImageSource = new BitmapImage(new Uri(cardState.ImagePath, UriKind.Relative)),
-                                        Stretch = Stretch.Uniform
-                                    };
-                                    cardButton.IsEnabled = false;
-                                }
-                                else
-                                {
-                                    cardButton.Content = "?";
-                                    cardButton.CommandParameter = cardButton; // așa trimitem butonul la click
-                                }
-
-                                GameCards.Add(cardButton);
+                                cardButton.IsEnabled = false;
                             }
-                            OnPropertyChanged(nameof(SelectedRows));
-                            OnPropertyChanged(nameof(SelectedColumns));
+                            else
+                            {
+                                cardButton.Content = "?";
+                                cardButton.CommandParameter = cardButton;
+                            }
 
-                            OnPropertyChanged(nameof(GameCards));
-
-                            _gameTimer.Start();
-                            IsTimerRunning = true;
-                            OnPropertyChanged(nameof(IsTimerRunning));
-                            OnPropertyChanged(nameof(ElapsedTime));
-
-                            MessageBox.Show("Game loaded successfully.");
+                            GameCards.Add(cardButton);
                         }
-                        else
-                        {
-                            MessageBox.Show("No saved game found for this user.");
-                        }
+                        OnPropertyChanged(nameof(SelectedRows));
+                        OnPropertyChanged(nameof(SelectedColumns));
+
+                        OnPropertyChanged(nameof(GameCards));
+
+                        _gameTimer.Start();
+                        IsTimerRunning = true;
+                        OnPropertyChanged(nameof(IsTimerRunning));
+                        OnPropertyChanged(nameof(ElapsedTime));
+
+                        MessageBox.Show("Game loaded successfully.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No saved game found for this user.");
                     }
                 }
                 else
@@ -499,6 +501,11 @@ namespace MemoryGame.ViewModels
 
         private void SaveGame(object obj)
         {
+            if (IsGameInactive == true)
+            {
+                MessageBox.Show("You must start a game before you can save it!");
+                return;
+            }
             try
             {
                 var savedGame = new SavedGame
@@ -527,8 +534,19 @@ namespace MemoryGame.ViewModels
                     }
                 }
 
-                string json = JsonSerializer.Serialize(savedGame, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText("../../../Data/saved_game.json", json);
+                List<SavedGame> allGames = new List<SavedGame>();
+                if (File.Exists("../../../Data/saved_game.json"))
+                {
+                    var existingJson = File.ReadAllText("../../../Data/saved_game.json");
+                    allGames = JsonSerializer.Deserialize<List<SavedGame>>(existingJson) ?? new List<SavedGame>();
+                }
+
+                allGames.RemoveAll(g => g.PlayerName == SelectedUser?.Name);
+
+                allGames.Add(savedGame);
+
+                string updatedJson = JsonSerializer.Serialize(allGames, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText("../../../Data/saved_game.json", updatedJson);
 
                 ResetGame();
 

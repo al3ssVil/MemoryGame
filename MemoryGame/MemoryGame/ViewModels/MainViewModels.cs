@@ -138,8 +138,31 @@ namespace MemoryGame.ViewModels
         {
             if (SelectedUser != null)
             {
+                DeleteSavedGame(SelectedUser);
                 Users.Remove(SelectedUser);
                 SaveUsers();
+            }
+        }
+
+        private void DeleteSavedGame(User user)
+        {
+            try
+            { 
+                if (File.Exists("../../../Data/saved_game.json"))
+                {
+                    string json = File.ReadAllText("../../../Data/saved_game.json");
+                    var allGames = JsonSerializer.Deserialize<List<SavedGame>>(json) ?? new List<SavedGame>();
+
+                    allGames.RemoveAll(g => g.PlayerName == user.Name);
+
+                    string updatedJson = JsonSerializer.Serialize(allGames, new JsonSerializerOptions { WriteIndented = true });
+                    File.WriteAllText("../../../Data/saved_game.json", updatedJson);
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error while deleting saved game: {ex.Message}");
             }
         }
 
