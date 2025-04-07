@@ -193,6 +193,7 @@ namespace MemoryGame.ViewModels
             currentImageIndex = (currentImageIndex - 1 + availableImages.Count) % availableImages.Count;
             SelectedImage = availableImages[currentImageIndex];
         }
+
         private void LoadUsers()
         {
             if (File.Exists("../../../Data/users.json"))
