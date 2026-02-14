@@ -1,0 +1,30 @@
+## Visual Studio / WPF / .NET
+
+# Build folders
+bin/
+obj/
+
+# Visual Studio cache
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Generated files
+*.g.cs
+*.g.i.cs
+*.cache
+*.baml
+
+# NuGet / restore
+project.assets.json
+project.nuget.cache
+*.nupkg
+packages/
+
+# Logs / temp
+*.log
+*.tmp
+Thumbs.db
+Desktop.ini
